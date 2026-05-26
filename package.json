@@ -1,0 +1,62 @@
+{
+  "name": "equinox-theme",
+  "version": "1.0.0",
+  "description": "Multi-platform ergonomic theme system for VS Code, JetBrains IDEs, and macOS Terminal. Eliminates cognitive fatigue and strictly adheres to WCAG AAA contrast standards.",
+  "author": "Equinox Theme Contributors",
+  "license": "MIT",
+  "main": "dist/build.js",
+  "types": "dist/build.d.ts",
+  "scripts": {
+    "build": "tsc && node dist/build.js",
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "dev": "tsc --watch",
+    "playground": "npm run build && npm run serve-playground",
+    "serve-playground": "cd dist/playground && python3 -m http.server 8000",
+    "prepare": "husky install"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^18.4.4",
+    "@commitlint/config-conventional": "^18.4.4",
+    "@types/node": "^20.10.6",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.1.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write"
+    ],
+    "*.json": [
+      "prettier --write"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
+  },
+  "keywords": [
+    "theme",
+    "vscode",
+    "jetbrains",
+    "terminal",
+    "ergonomic",
+    "wcag",
+    "contrast",
+    "syntax-highlighting",
+    "color-scheme"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/equinox-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/equinox-theme/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

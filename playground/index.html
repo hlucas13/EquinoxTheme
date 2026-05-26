@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Equinox Theme Playground | Live Preview</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-content">
+          <h1>🎨 Equinox Theme Playground</h1>
+          <p>Live preview of all 4 variants across 3 platforms</p>
+        </div>
+        <div class="header-controls">
+          <div class="control-group">
+            <label for="theme-select">Variant:</label>
+            <select id="theme-select">
+              <option value="dark-modern">Equinox Dark Modern</option>
+              <option value="dark-contrast">Equinox Dark Contrast</option>
+              <option value="light-soft">Equinox Light Soft</option>
+              <option value="light-contrast">Equinox Light Contrast</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="platform-select">Platform:</label>
+            <select id="platform-select">
+              <option value="vscode">VS Code</option>
+              <option value="jetbrains">JetBrains IDE</option>
+              <option value="terminal">macOS Terminal</option>
+            </select>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Preview Container -->
+        <section class="preview-section">
+          <div id="preview-container" class="preview-container"></div>
+        </section>
+
+        <!-- Sidebar: Color Palette -->
+        <aside class="sidebar">
+          <div class="sidebar-content">
+            <h2>Color Palette</h2>
+            <div id="color-palette" class="color-palette"></div>
+
+            <h2 style="margin-top: 2rem">Syntax Highlighting</h2>
+            <div id="syntax-palette" class="syntax-palette"></div>
+
+            <h2 style="margin-top: 2rem">ANSI Colors</h2>
+            <div id="ansi-palette" class="ansi-palette"></div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <!-- Modal for larger color preview -->
+    <div id="color-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modal-title"></h2>
+        <div id="modal-body"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
