@@ -88,7 +88,14 @@ jobs:
               if: env.VSCE_PAT != ''
               run: |
                   VSIX=$(ls dist/marketplace/vscode/*.vsix | head -1)
-                  npx @vscode/vsce publish --packagePath "$VSIX" --pat "$VSCE_PAT"
+                  OUTPUT=$(npx @vscode/vsce publish --packagePath "$VSIX" --pat "$VSCE_PAT" 2>&1) && echo "$OUTPUT" || {
+                    echo "$OUTPUT"
+                    if echo "$OUTPUT" | grep -q "already exists"; then
+                      echo "::warning::Version already published — skipping duplicate."
+                    else
+                      exit 1
+                    fi
+                  }
 
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v2
