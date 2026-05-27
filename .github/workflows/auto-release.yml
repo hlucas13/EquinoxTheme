@@ -17,6 +17,8 @@ jobs:
         # Skip version-bump commits (avoid infinite loop)
         if: "!startsWith(github.event.head_commit.message, 'chore: bump version')"
         runs-on: ubuntu-latest
+        env:
+            VSCE_PAT: ${{ secrets.VSCE_PAT }}
 
         steps:
             - uses: actions/checkout@v4
@@ -80,10 +82,10 @@ jobs:
                   git push origin main --follow-tags
 
             - name: Publish to VS Code Marketplace
-              if: ${{ secrets.VSCE_PAT != '' }}
+              if: env.VSCE_PAT != ''
               run: |
                   VSIX=$(ls dist/marketplace/vscode/*.vsix | head -1)
-                  npx @vscode/vsce publish --packagePath "$VSIX" --pat ${{ secrets.VSCE_PAT }}
+                  npx @vscode/vsce publish --packagePath "$VSIX" --pat "$VSCE_PAT"
 
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v2
