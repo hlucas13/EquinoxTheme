@@ -63,9 +63,9 @@ jobs:
               uses: softprops/action-gh-release@v2
               with:
                   tag_name: ${{ steps.version.outputs.tag }}
-                  name: Equinox Theme ${{ steps.version.outputs.tag }}
+                  name: Equinox Colors ${{ steps.version.outputs.tag }}
                   body: |
-                      ## Equinox Theme ${{ steps.version.outputs.tag }}
+                      ## Equinox Colors ${{ steps.version.outputs.tag }}
 
                       Multi-platform ergonomic theme for VS Code, JetBrains IDEs, and macOS Terminal.
 

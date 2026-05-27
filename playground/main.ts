@@ -34,7 +34,7 @@ const THEMES: Record<ThemeKey, PlaygroundEntry> = {
 // SAMPLE CODE SNIPPETS
 // ============================================================================
 
-const SAMPLE_CODE = `// Equinox Theme — TypeScript sample
+const SAMPLE_CODE = `// Equinox Colors — TypeScript sample
 import { createServer } from 'http';
 
 interface Config {
@@ -70,7 +70,7 @@ async function startServer(config = DEFAULT_CONFIG) {
 
 startServer().catch(console.error);`;
 
-const SAMPLE_CODE_JAVA = `// Equinox Theme — Java sample
+const SAMPLE_CODE_JAVA = `// Equinox Colors — Java sample
 package com.equinox.server;
 
 import java.util.Map;
@@ -364,15 +364,15 @@ function renderTerminal(entry: PlaygroundEntry): string {
     const { variant, ansi } = entry;
     const p = variant.palette;
 
-    const prompt = `<span style="color:${ansi.green};font-weight:bold">hlucas@equinox</span><span style="color:${ansi.white}">:</span><span style="color:${ansi.blue}">~/projects/equinox-theme</span><span style="color:${ansi.white}"> $ </span>`;
+    const prompt = `<span style="color:${ansi.green};font-weight:bold">hlucas@equinox</span><span style="color:${ansi.white}">:</span><span style="color:${ansi.blue}">~/projects/equinox-colors</span><span style="color:${ansi.white}"> $ </span>`;
 
     const lines: string[] = [
         `${prompt}<span style="color:${p.editor.foreground}">npm run build</span>`,
         ``,
-        `<span style="color:${ansi.cyan}">&gt; equinox-theme@0.0.1 build</span>`,
+        `<span style="color:${ansi.cyan}">&gt; equinox-colors@0.0.1 build</span>`,
         `<span style="color:${ansi.cyan}">&gt; node build.js</span>`,
         ``,
-        `<span style="color:${p.editor.foreground}">🎨 Equinox Theme Builder</span>`,
+        `<span style="color:${p.editor.foreground}">🎨 Equinox Colors Builder</span>`,
         `<span style="color:${ansi.white}">═══════════════════════════════════════</span>`,
         `<span style="color:${ansi.green}">✓ Created output directories</span>`,
         ``,
@@ -622,7 +622,7 @@ function buildHelpContent(): string {
           <h3 class="help-section-title">About this Playground</h3>
         </div>
         <div class="help-section-body">
-          <p class="help-p">The <strong>Equinox Theme Playground</strong> is a live preview tool for the Equinox color theme across all supported platforms. Use the dock at the bottom to switch variants and platforms and see the theme rendered in context.</p>
+          <p class="help-p">The <strong>Equinox Colors Playground</strong> is a live preview tool for the Equinox color theme across all supported platforms. Use the dock at the bottom to switch variants and platforms and see the theme rendered in context.</p>
         </div>
       </div>
 

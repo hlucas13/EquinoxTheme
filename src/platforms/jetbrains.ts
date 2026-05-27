@@ -1,5 +1,5 @@
 /**
- * Equinox Theme: JetBrains Compiler
+ * Equinox Colors: JetBrains Compiler
  * Generates JetBrains IDE .icls Color Scheme XML format
  * Compatible with IntelliJ IDEA, WebStorm, PyCharm, Kotlin, GoLand, etc.
  * Also generates .theme.json UI themes with Islands (New UI) support.

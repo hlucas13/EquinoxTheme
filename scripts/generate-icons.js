@@ -1,6 +1,6 @@
 // @ts-check
 /**
- * Equinox Theme — Icon Generator
+ * Equinox Colors — Icon Generator
  *
  * Converts images/icon.svg into rasterised PNG files at the sizes required by
  * each marketplace:
@@ -31,7 +31,7 @@ async function main() {
     }
 
     fs.mkdirSync(ICONS_DIR, { recursive: true });
-    console.log('🎨 Equinox Theme — Icon Generator\n');
+    console.log('🎨 Equinox Colors — Icon Generator\n');
     console.log(`Source : ${path.relative(ROOT, SVG_PATH)}`);
     console.log(`Output : ${path.relative(ROOT, ICONS_DIR)}/\n`);
 

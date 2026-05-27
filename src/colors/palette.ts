@@ -1,5 +1,5 @@
 /**
- * Equinox Theme: Color Palette
+ * Equinox Colors: Color Palette
  *
  * Single source of truth for every hex value used across all variants and
  * platforms. To update a color or create a new theme variant, edit ONLY this

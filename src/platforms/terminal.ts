@@ -1,5 +1,5 @@
 /**
- * Equinox Theme: macOS Terminal Compiler
+ * Equinox Colors: macOS Terminal Compiler
  * Generates macOS Terminal .terminal XML property list format
  * Creates fully compatible Terminal.app profiles with ANSI color palette
  */

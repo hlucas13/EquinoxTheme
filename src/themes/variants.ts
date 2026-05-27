@@ -1,5 +1,5 @@
 /**
- * Equinox Theme: Variant Definitions
+ * Equinox Colors: Variant Definitions
  *
  * Builds the four theme variants from the centralized palette. All color
  * references point to `../colors/palette` — never use raw hex strings here.

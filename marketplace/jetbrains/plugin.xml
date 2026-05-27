@@ -1,12 +1,12 @@
 <idea-plugin>
     <!-- ── Plugin identity ─────────────────────────────────────────────────── -->
-    <id>io.equinox.theme</id>
-    <name>Equinox Theme</name>
+    <id>io.equinox.color.theme</id>
+    <name>Equinox Colors</name>
     <version>1.0.0</version>
 
     <description><![CDATA[
         <p>
-            <strong>Equinox Theme</strong> — a multi-platform ergonomic color theme
+            <strong>Equinox Colors</strong> — a multi-platform ergonomic color theme
             system with four carefully balanced variants. Every color pair meets
             <strong>WCAG AAA (7:1)</strong> contrast, reducing cognitive fatigue
             during long coding sessions.
@@ -30,7 +30,7 @@
 
         <h3>Installation</h3>
         <ol>
-            <li>Install via <em>Settings → Plugins → Marketplace</em> and search for <strong>Equinox Theme</strong>.</li>
+            <li>Install via <em>Settings → Plugins → Marketplace</em> and search for <strong>Equinox Colors</strong>.</li>
             <li>Go to <em>Settings → Appearance → Theme</em> and select the desired Equinox variant.</li>
             <li>For the color scheme only: <em>Settings → Editor → Color Scheme</em>.</li>
         </ol>
@@ -65,19 +65,19 @@
 
         <!-- ── UI Themes (New UI / Islands) ─────────────────────────────── -->
         <themeProvider
-            id="io.equinox.theme.dark-modern"
+            id="io.equinox.color.theme.dark-modern"
             path="/themes/equinox-dark-modern.theme.json"
         />
         <themeProvider
-            id="io.equinox.theme.dark-contrast"
+            id="io.equinox.color.theme.dark-contrast"
             path="/themes/equinox-dark-contrast.theme.json"
         />
         <themeProvider
-            id="io.equinox.theme.light-soft"
+            id="io.equinox.color.theme.light-soft"
             path="/themes/equinox-light-soft.theme.json"
         />
         <themeProvider
-            id="io.equinox.theme.light-contrast"
+            id="io.equinox.color.theme.light-contrast"
             path="/themes/equinox-light-contrast.theme.json"
         />
 

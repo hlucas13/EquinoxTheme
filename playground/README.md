@@ -1,4 +1,4 @@
-# Equinox Theme Playground
+# Equinox Colors Playground
 
 An interactive live preview of all Equinox theme variants across all supported platforms.
 

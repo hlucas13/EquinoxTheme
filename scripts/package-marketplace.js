@@ -1,11 +1,11 @@
 // @ts-check
 /**
- * Equinox Theme — Marketplace Packager
+ * Equinox Colors — Marketplace Packager
  *
  * Assembles ready-to-submit bundles for each marketplace after `npm run build`.
  *
- *   VS Code Marketplace  → dist/marketplace/vscode/equinox-theme-<version>.vsix
- *   JetBrains Marketplace→ dist/marketplace/jetbrains/equinox-theme-<version>.zip
+ *   VS Code Marketplace  → dist/marketplace/vscode/equinox-colors-<version>.vsix
+ *   JetBrains Marketplace→ dist/marketplace/jetbrains/equinox-colors-<version>.zip
  *
  * Usage:
  *   node scripts/package-marketplace.js            # packages both
@@ -121,7 +121,7 @@ function packageVsCode() {
     // Try to run vsce to produce a .vsix
     try {
         execSync('vsce --version', { stdio: 'ignore' });
-        const vsixName = `equinox-theme-${VERSION}.vsix`;
+        const vsixName = `equinox-colors-${VERSION}.vsix`;
         execFileSync(
             'vsce',
             [
@@ -162,7 +162,7 @@ function packageJetBrains() {
         process.exit(1);
     }
 
-    const pluginDir = path.join(OUT, 'jetbrains', '_stage', 'equinox-theme');
+    const pluginDir = path.join(OUT, 'jetbrains', '_stage', 'equinox-colors');
     const metaDir = path.join(pluginDir, 'META-INF');
     const colorsOut = path.join(pluginDir, 'colors');
     const themesOut = path.join(pluginDir, 'themes');
@@ -219,7 +219,7 @@ function packageJetBrains() {
 
     // Create ZIP
     const outDir = path.join(OUT, 'jetbrains');
-    const zipName = `equinox-theme-${VERSION}.zip`;
+    const zipName = `equinox-colors-${VERSION}.zip`;
     const zipPath = path.join(outDir, zipName);
 
     const output = fs.createWriteStream(zipPath);
@@ -234,8 +234,8 @@ function packageJetBrains() {
         });
         archive.on('error', reject);
         archive.pipe(output);
-        // Add the equinox-theme/ folder preserving the top-level folder name
-        archive.directory(pluginDir, 'equinox-theme');
+        // Add the equinox-colors/ folder preserving the top-level folder name
+        archive.directory(pluginDir, 'equinox-colors');
         archive.finalize();
     });
 }
@@ -243,7 +243,7 @@ function packageJetBrains() {
 // ── Entry point ───────────────────────────────────────────────────────────────
 
 async function main() {
-    console.log(`🎨  Equinox Theme — Marketplace Packager  (v${VERSION})\n`);
+    console.log(`🎨  Equinox Colors — Marketplace Packager  (v${VERSION})\n`);
     console.log('═══════════════════════════════════════');
 
     ensureDir(OUT);

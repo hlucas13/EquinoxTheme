@@ -1,4 +1,4 @@
-# JetBrains Marketplace — Equinox Theme
+# JetBrains Marketplace — Equinox Colors
 
 ## Plugin structure
 
@@ -6,7 +6,7 @@ A JetBrains plugin is distributed as a **ZIP** containing a single folder.
 The required layout for a theme-only plugin is:
 
 ```
-equinox-theme/
+equinox-colors/
 ├── META-INF/
 │   └── plugin.xml            ← plugin descriptor (this directory)
 ├── colors/
@@ -33,7 +33,7 @@ From the project root, run the automated packaging script after building:
 cd ../..
 npm run build
 npm run package:jetbrains
-# Output: dist/marketplace/jetbrains/equinox-theme-<version>.zip
+# Output: dist/marketplace/jetbrains/equinox-colors-<version>.zip
 ```
 
 ## Manual packaging
@@ -44,7 +44,7 @@ cd ../..
 npm run build
 
 # 2. Create plugin directory layout
-PLUGIN_DIR=marketplace/jetbrains/equinox-theme
+PLUGIN_DIR=marketplace/jetbrains/equinox-colors
 mkdir -p "$PLUGIN_DIR/META-INF"
 mkdir -p "$PLUGIN_DIR/colors"
 mkdir -p "$PLUGIN_DIR/themes"
@@ -56,7 +56,7 @@ cp dist/jetbrains/themes/*.theme.json "$PLUGIN_DIR/themes/"
 
 # 4. Zip
 cd marketplace/jetbrains
-zip -r equinox-theme-1.0.0.zip equinox-theme/
+zip -r equinox-colors-1.0.0.zip equinox-colors/
 ```
 
 ## Plugin icon

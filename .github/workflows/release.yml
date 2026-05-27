@@ -46,9 +46,9 @@ jobs:
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v2
               with:
-                  name: Equinox Theme ${{ github.ref_name }}
+                  name: Equinox Colors ${{ github.ref_name }}
                   body: |
-                      ## Equinox Theme ${{ github.ref_name }}
+                      ## Equinox Colors ${{ github.ref_name }}
 
                       Multi-platform ergonomic theme for VS Code, JetBrains IDEs, and macOS Terminal.
 

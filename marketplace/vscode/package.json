@@ -1,7 +1,7 @@
 {
     "$schema": "https://json.schemastore.org/vscode-extension-manifest.json",
-    "name": "equinox-theme",
-    "displayName": "Equinox Theme",
+    "name": "equinox-colors",
+    "displayName": "Equinox Colors",
     "description": "Multi-platform ergonomic theme system for VS Code, JetBrains IDEs, and macOS Terminal. Four variants — Dark Modern, Dark Contrast, Light Soft, Light Contrast. Every colour combination meets WCAG AAA (7:1) contrast.",
     "version": "1.0.0",
     "publisher": "equinox-team",

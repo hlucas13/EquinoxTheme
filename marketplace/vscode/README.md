@@ -1,4 +1,4 @@
-# VS Code Marketplace — Equinox Theme
+# VS Code Marketplace — Equinox Colors
 
 ## Quick packaging (recommended)
 
@@ -8,7 +8,7 @@ From the project root, run the automated packaging script after building:
 cd ../..
 npm run build
 npm run package:vscode
-# Output: dist/marketplace/vscode/equinox-theme-<version>.vsix
+# Output: dist/marketplace/vscode/equinox-colors-<version>.vsix
 ```
 
 ## Manual packaging with `vsce`
@@ -31,7 +31,7 @@ cd marketplace/vscode
 vsce package
 ```
 
-This produces `equinox-theme-1.0.0.vsix`.
+This produces `equinox-colors-1.0.0.vsix`.
 
 ## Publishing
 

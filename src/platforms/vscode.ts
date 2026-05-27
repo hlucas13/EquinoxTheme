@@ -1,5 +1,5 @@
 /**
- * Equinox Theme: VS Code Compiler
+ * Equinox Colors: VS Code Compiler
  * Generates VS Code theme JSON with universal language support
  * Maps syntax tokens to standard semantic scopes
  */

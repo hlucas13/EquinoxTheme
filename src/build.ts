@@ -1,5 +1,5 @@
 /**
- * Equinox Theme: Build Script
+ * Equinox Colors: Build Script
  * Orchestrates compilation of all 4 variants across all 3 platforms
  * Outputs: dist/vscode/*.json, dist/jetbrains/*.icls, dist/terminal/*.terminal
  */
@@ -128,7 +128,7 @@ function buildTerminalProfiles() {
 function generateManifest() {
     console.log('\n📋 Generating manifest...');
     const manifest = {
-        name: 'Equinox Theme',
+        name: 'Equinox Colors',
         version: '1.0.0',
         description:
             'A multi-platform ergonomic theme system eliminating cognitive fatigue',
@@ -179,7 +179,7 @@ function generateManifest() {
 
 // Main build orchestrator
 export function build(): void {
-    console.log('🎨 Equinox Theme Builder\n');
+    console.log('🎨 Equinox Colors Builder\n');
     console.log('═══════════════════════════════════════');
 
     try {

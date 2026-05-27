@@ -1,4 +1,4 @@
-# Equinox Theme
+# Equinox Colors
 
 A multi-platform ergonomic theme system for VS Code, JetBrains IDEs, and macOS Terminal. One TypeScript source of truth compiles 4 variants across all 3 platforms simultaneously. Every color combination meets WCAG AAA (7:1) contrast.
 
@@ -25,8 +25,8 @@ A multi-platform ergonomic theme system for VS Code, JetBrains IDEs, and macOS T
 ## Quick Start
 
 ```bash
-git clone https://github.com/yourusername/equinox-theme.git
-cd equinox-theme
+git clone https://github.com/yourusername/equinox-colors.git
+cd equinox-colors
 npm install
 npm run build
 ```
@@ -121,7 +121,7 @@ Double-click any `.terminal` file in `dist/terminal/` to import it, then set as 
 ### Project Structure
 
 ```
-equinox-theme/
+equinox-colors/
 ├── src/
 │   ├── colors/
 │   │   └── palette.ts          # Single source of truth — all hex values
@@ -255,7 +255,7 @@ All submission metadata lives in `marketplace/`. See the README in each subdirec
 cd marketplace/vscode
 npm install -g @vscode/vsce
 vsce package
-# produces equinox-theme-X.Y.Z.vsix — upload to marketplace.visualstudio.com
+# produces equinox-colors-X.Y.Z.vsix — upload to marketplace.visualstudio.com
 ```
 
 **JetBrains quick reference:** copy `dist/jetbrains/` and `dist/jetbrains/themes/` into the plugin JAR structure described in `marketplace/jetbrains/README.md`, then ZIP and upload to plugins.jetbrains.com.
