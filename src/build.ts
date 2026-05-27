@@ -6,6 +6,7 @@
 
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import {
     generateJetBrainsColorScheme,
     generateJetBrainsIslandsColorScheme,
@@ -13,10 +14,7 @@ import {
     jetBrainsColorSchemeToXml,
     jetBrainsThemeToJson,
 } from './platforms/jetbrains';
-import {
-    generateTerminalProfile,
-    terminalProfileToXml,
-} from './platforms/terminal';
+import { generateTerminalProfile } from './platforms/terminal';
 import { generateVsCodeTheme, vscodeThemeToJson } from './platforms/vscode';
 import {
     allVariants,
@@ -111,17 +109,61 @@ function buildTerminalProfiles() {
         { variant: equinoxLightContrast, ansi: lightAnsiPalette },
     ];
 
-    variantsWithAnsi.forEach(({ variant, ansi }) => {
+    // Build profile data array for the Python generator
+    const profiles = variantsWithAnsi.map(({ variant, ansi }) => {
         const profile = generateTerminalProfile(variant, ansi);
-        const xml = terminalProfileToXml(profile);
         const filename = variant.name
             .toLowerCase()
             .replace(/\s+/g, '-')
             .replace(/[()]/g, '');
-        const filepath = path.join(terminalDir, `${filename}.terminal`);
-        fs.writeFileSync(filepath, xml, 'utf-8');
-        console.log(`  ✓ ${variant.name}`);
+        return {
+            filename,
+            name: profile.name,
+            background: profile.backgroundColor,
+            foreground: profile.foregroundColor,
+            cursor: profile.cursorColor,
+            ansi: {
+                black: ansi.black,
+                red: ansi.red,
+                green: ansi.green,
+                yellow: ansi.yellow,
+                blue: ansi.blue,
+                magenta: ansi.magenta,
+                cyan: ansi.cyan,
+                white: ansi.white,
+                brightBlack: ansi.brightBlack,
+                brightRed: ansi.brightRed,
+                brightGreen: ansi.brightGreen,
+                brightYellow: ansi.brightYellow,
+                brightBlue: ansi.brightBlue,
+                brightMagenta: ansi.brightMagenta,
+                brightCyan: ansi.brightCyan,
+                brightWhite: ansi.brightWhite,
+            },
+        };
     });
+
+    // Write JSON data for the Python generator and call it
+    const rootDir = path.join(__dirname, '..');
+    const profilesJson = path.join(terminalDir, '_profiles.json');
+    fs.writeFileSync(profilesJson, JSON.stringify(profiles, null, 2), 'utf-8');
+
+    const pyScript = path.join(rootDir, 'scripts', 'generate-terminal.py');
+    try {
+        execFileSync('python3', [pyScript, profilesJson, terminalDir], {
+            stdio: ['ignore', 'pipe', 'pipe'],
+        });
+        fs.rmSync(profilesJson);
+        profiles.forEach((p) => console.log(`  ✓ ${p.name}`));
+    } catch (err: unknown) {
+        const e = err as { stderr?: Buffer; message?: string };
+        const msg = e.stderr?.toString() ?? e.message ?? String(err);
+        console.error(
+            '  ❌ Terminal profile generation failed:\n    ' + msg.trim()
+        );
+        console.error('     Run: pip3 install pyobjc --break-system-packages');
+        fs.rmSync(profilesJson, { force: true });
+    }
 }
 
 // Generate manifest/index
