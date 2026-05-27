@@ -1,5 +1,19 @@
 # VS Code Marketplace — Equinox Colors
 
+[![VS Code Marketplace](https://img.shields.io/badge/VS%20Code%20Marketplace-equinox--colors-0078d7?logo=visualstudiocode)](https://marketplace.visualstudio.com/items?itemName=equinox-team.equinox-colors)
+
+**One-click install** — opens directly in VS Code:
+
+[![Install in VS Code](https://img.shields.io/badge/Install%20in-VS%20Code-0078d7?logo=visualstudiocode)](vscode:extension/equinox-team.equinox-colors)
+
+Or search **"Equinox Colors"** in the Extensions panel (`Ctrl+Shift+X` / `⌘⇧X`), or run in the VS Code Quick Open (`Ctrl+P` / `⌘P`):
+
+```
+ext install equinox-team.equinox-colors
+```
+
+---
+
 ## Quick packaging (recommended)
 
 From the project root, run the automated packaging script after building:

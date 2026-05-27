@@ -2,6 +2,33 @@
 
 A multi-platform ergonomic theme system for VS Code, JetBrains IDEs, and macOS Terminal. One TypeScript source of truth compiles 4 variants across all 3 platforms simultaneously. Every color combination meets WCAG AAA (7:1) contrast.
 
+[![VS Code Marketplace](https://img.shields.io/badge/VS%20Code%20Marketplace-equinox--colors-0078d7?logo=visualstudiocode)](https://marketplace.visualstudio.com/items?itemName=equinox-team.equinox-colors)
+[![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/v/31990?label=JetBrains%20Marketplace&logo=jetbrains)](https://plugins.jetbrains.com/plugin/31990-equinox-colors/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+## Install from Marketplace
+
+### VS Code
+
+**One-click install** — opens directly in VS Code:
+
+[![Install in VS Code](https://img.shields.io/badge/Install%20in-VS%20Code-0078d7?logo=visualstudiocode)](vscode:extension/equinox-team.equinox-colors)
+
+Or search **"Equinox Colors"** in the Extensions panel (`Ctrl+Shift+X` / `⌘⇧X`), or run:
+
+```
+ext install equinox-team.equinox-colors
+```
+
+### JetBrains IDEs
+
+[![Install in JetBrains](https://img.shields.io/badge/Install%20in-JetBrains%20IDEs-000000?logo=jetbrains)](https://plugins.jetbrains.com/plugin/31990-equinox-colors/)
+
+Go to **Settings → Plugins → Marketplace**, search **"Equinox Colors"** and click **Install**.  
+Or install directly from the browser via the **Get** button on the [plugin page](https://plugins.jetbrains.com/plugin/31990-equinox-colors/).
+
+After installing: **Settings → Appearance → Theme** → select the desired Equinox variant.
+
 ## Features
 
 - **4 variants**: Dark Modern, Dark Contrast, Light Soft, Light Contrast
