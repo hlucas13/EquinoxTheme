@@ -145,7 +145,7 @@ function packageVsCode() {
 
 // ── JetBrains ────────────────────────────────────────────────────────────────
 
-function packageJetBrains() {
+async function packageJetBrains() {
     console.log('\n📦  Packaging JetBrains plugin…');
 
     assertDistExists('jetbrains');
@@ -217,8 +217,27 @@ function packageJetBrains() {
         }
     }
 
-    // Create ZIP
+    // Step 1: Create inner JAR (equinox-colors.jar) containing META-INF + themes + colors
+    // A JAR is just a ZIP with .jar extension — archiver handles it fine.
     const outDir = path.join(OUT, 'jetbrains');
+    const libDir = path.join(pluginDir, 'lib');
+    ensureDir(libDir);
+    const jarPath = path.join(libDir, 'equinox-colors.jar');
+
+    await new Promise((resolve, reject) => {
+        const jarOutput = fs.createWriteStream(jarPath);
+        const jar = archiver('zip', { zlib: { level: 9 } });
+        jarOutput.on('close', resolve);
+        jar.on('error', reject);
+        jar.pipe(jarOutput);
+        jar.directory(metaDir, 'META-INF');
+        jar.directory(colorsOut, 'colors');
+        jar.directory(themesOut, 'themes');
+        jar.finalize();
+    });
+    console.log('  ✓ lib/equinox-colors.jar');
+
+    // Step 2: Create outer ZIP containing equinox-colors/lib/equinox-colors.jar
     const zipName = `equinox-colors-${VERSION}.zip`;
     const zipPath = path.join(outDir, zipName);
 
@@ -234,8 +253,8 @@ function packageJetBrains() {
         });
         archive.on('error', reject);
         archive.pipe(output);
-        // Add the equinox-colors/ folder preserving the top-level folder name
-        archive.directory(pluginDir, 'equinox-colors');
+        // Only include the lib/ folder — META-INF/plugin.xml lives inside the JAR
+        archive.file(jarPath, { name: 'equinox-colors/lib/equinox-colors.jar' });
         archive.finalize();
     });
 }
