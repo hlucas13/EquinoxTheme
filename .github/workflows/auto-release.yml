@@ -76,7 +76,9 @@ jobs:
                   fi
 
             - name: Package VS Code extension (.vsix)
-              run: npm run package:vscode
+              run: |
+                  npm install -g @vscode/vsce
+                  npm run package:vscode
 
             - name: Commit version bump, tag and push
               run: |

@@ -118,6 +118,12 @@ function packageVsCode() {
         }
     }
 
+    // Screenshots (shown on marketplace page)
+    const screenshotsDir = path.join(vscodePkg, 'screenshots');
+    if (fs.existsSync(screenshotsDir)) {
+        copyDir(screenshotsDir, path.join(stageDir, 'screenshots'));
+    }
+
     // Try to run vsce to produce a .vsix
     try {
         execSync('vsce --version', { stdio: 'ignore' });
