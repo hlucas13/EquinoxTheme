@@ -3,8 +3,7 @@
     "name": "equinox-colors",
     "displayName": "Equinox Colors",
     "description": "Ergonomic color theme with four variants — Dark Modern, Dark Contrast, Light Soft, Light Contrast. WCAG AAA (7:1) contrast throughout. Calming palette designed for long sessions.",
-
-    "version": "1.0.1",
+    "version": "1.0.2",
     "publisher": "equinox-team",
     "author": {
         "name": "Equinox Team"
