@@ -46,18 +46,14 @@ jobs:
                   echo "tag=v$VERSION" >> $GITHUB_OUTPUT
                   echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-            - name: Sync marketplace/vscode version
+            - name: Bump marketplace/vscode version
+              id: mkt_version
               run: |
-                  VERSION=${{ steps.version.outputs.version }}
-                  node -e "
-                    const fs = require('fs');
-                    const p = 'marketplace/vscode/package.json';
-                    const pkg = JSON.parse(fs.readFileSync(p, 'utf8'));
-                    pkg.version = process.env.VERSION;
-                    fs.writeFileSync(p, JSON.stringify(pkg, null, 4) + '\n');
-                  "
-              env:
-                  VERSION: ${{ steps.version.outputs.version }}
+                  cd marketplace/vscode
+                  npm version patch --no-git-tag-version
+                  MKT_VERSION=$(node -p "require('./package.json').version")
+                  echo "version=$MKT_VERSION" >> $GITHUB_OUTPUT
+                  cd ../..
 
             - name: Build themes
               run: npm run build
