@@ -58,7 +58,8 @@
     <idea-version since-build="233.0" />
 
     <!-- ── Dependencies ───────────────────────────────────────────────────── -->
-    <!-- No plugin dependencies; this is a pure theme plugin -->
+    <!-- Required by the marketplace validator for all plugins, including theme-only ones -->
+    <depends>com.intellij.modules.platform</depends>
 
     <!-- ── Extensions ─────────────────────────────────────────────────────── -->
     <extensions defaultExtensionNs="com.intellij">
