@@ -306,9 +306,7 @@ describe('generateJetBrainsIslandsTheme', () => {
 
     it('generates valid Islands UI themes for all 4 variants without throwing', () => {
         for (const variant of allVariants) {
-            expect(() =>
-                generateJetBrainsIslandsTheme(variant)
-            ).not.toThrow();
+            expect(() => generateJetBrainsIslandsTheme(variant)).not.toThrow();
         }
     });
 
