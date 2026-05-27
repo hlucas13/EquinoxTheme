@@ -5,7 +5,12 @@
 **Install directly from your IDE**: go to **Settings → Plugins → Marketplace**, search **"Equinox Colors"** and click **Install**.  
 Or use the **Get** button on the [plugin page](https://plugins.jetbrains.com/plugin/31990-equinox-colors/) to install from the browser.
 
-After installing: **Settings → Appearance → Theme** → select the desired Equinox variant.
+After installing:
+
+1. **Settings → Appearance → Theme** → select the desired Equinox variant (changes the IDE UI).
+2. **Settings → Editor → Color Scheme** → select the **matching Equinox scheme** (same name as the theme chosen above).
+
+> The editor color scheme does **not** change automatically when switching UI themes — step 2 is always required.
 
 ---
 

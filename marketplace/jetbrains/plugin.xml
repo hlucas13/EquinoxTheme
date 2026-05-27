@@ -58,14 +58,24 @@
 
         <h3>Installation</h3>
         <ol>
-            <li>Go to <em>Settings → Plugins → Marketplace</em> and search for <strong>Equinox Colors</strong>, then click <em>Install</em>.</li>
-            <li>Go to <em>Settings → Appearance → Theme</em> and select the Equinox variant you want.</li>
-            <li>For the editor color scheme only: <em>Settings → Editor → Color Scheme</em>.</li>
+            <li>Go to <em>Settings → Plugins → Marketplace</em>, search for <strong>Equinox Colors</strong> and click <em>Install</em>. Restart if prompted.</li>
+            <li>Go to <em>Settings → Appearance → Theme</em> and select the Equinox variant you want (e.g. <em>Equinox Dark Modern</em>). This changes the IDE UI.</li>
+            <li>
+                Go to <em>Settings → Editor → Color Scheme</em> and select the <strong>matching Equinox scheme</strong> (same name as the theme you chose in step 2).
+                <br/>
+                <em>Note: the editor color scheme does not change automatically when switching UI themes — this step is always required.</em>
+            </li>
         </ol>
+
+        <p>
+            <strong>Islands layout (New UI):</strong> if you use the floating Islands panel layout, select the <em>Equinox … Islands</em> variant
+            under <em>Settings → Editor → Color Scheme</em> for an optimised desktop background colour.
+        </p>
     ]]></description>
 
     <change-notes><![CDATA[
         <ul>
+            <li><strong>1.0.1</strong> — Clarified installation: editor color scheme must be set manually in <em>Settings → Editor → Color Scheme</em> after selecting the UI theme.</li>
             <li><strong>1.0.0</strong> — Initial release: 4 variants × classic ICLS + Islands ICLS + UI theme.json</li>
         </ul>
     ]]></change-notes>
