@@ -65,10 +65,15 @@ jobs:
             - name: Package themes
               run: |
                   TAG=${{ steps.version.outputs.tag }}
-                  zip -r equinox-all-${TAG}.zip dist/vscode dist/jetbrains dist/terminal dist/manifest.json
                   (cd dist/vscode    && zip -r ../../equinox-vscode-${TAG}.zip .)
                   (cd dist/jetbrains && zip -r ../../equinox-jetbrains-${TAG}.zip .)
-                  (cd dist/terminal  && zip -r ../../equinox-terminal-${TAG}.zip .)
+                  # Terminal profiles require macOS + PyObjC — skip if not built
+                  if [ -n "$(ls dist/terminal/ 2>/dev/null)" ]; then
+                    (cd dist/terminal && zip -r ../../equinox-terminal-${TAG}.zip .)
+                    zip -r equinox-all-${TAG}.zip dist/vscode dist/jetbrains dist/terminal dist/manifest.json
+                  else
+                    zip -r equinox-all-${TAG}.zip dist/vscode dist/jetbrains dist/manifest.json
+                  fi
 
             - name: Package VS Code extension (.vsix)
               run: npm run package:vscode
