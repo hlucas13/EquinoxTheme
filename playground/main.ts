@@ -384,16 +384,18 @@ function renderTerminal(entry: PlaygroundEntry): string {
         ``,
         `<span style="color:${ansi.blue}">📦 Building JetBrains IDE color schemes...</span>`,
         `<span style="color:${ansi.green}">  ✓ Equinox Dark Modern</span>`,
-        `<span style="color:${ansi.green}">  ✓ Equinox Dark Contrast</span>`,
-        `<span style="color:${ansi.green}">  ✓ Equinox Light Soft</span>`,
-        `<span style="color:${ansi.green}">  ✓ Equinox Light Contrast</span>`,
-        ``,
+        `<span style="color:${ansi.green}">  ✓ Equinox Dark Modern Islands</span>`,
+        `<span style="color:${ansi.green}">  ✓ Equinox Dark Modern UI theme</span>`,
+        `<span style="color:${ansi.green}">  ✓ Equinox Dark Modern Islands UI theme</span>`,
+        `<span style="color:${ansi.green}">  ✓ Equinox Dark Contrast + Islands</span>`,
+        `<span style="color:${ansi.green}">  ✓ Equinox Light Soft + Islands</span>`,
+        `<span style="color:${ansi.green}">  ✓ Equinox Light Contrast + Islands</span>`,
         `<span style="color:${ansi.blue}">📦 Building macOS Terminal profiles...</span>`,
         `<span style="color:${ansi.green}">  ✓ All 4 variants</span>`,
         ``,
         `<span style="color:${ansi.white}">═══════════════════════════════════════</span>`,
         `<span style="color:${ansi.brightGreen}">✨ Build complete!</span>`,
-        `<span style="color:${ansi.white}">📦 Generated 4 variants across 3 platforms (12 files)</span>`,
+        `<span style="color:${ansi.white}">📦 4 variants × 3 platforms: 4 VS Code + 8 ICLS + 8 themes + 4 Terminal</span>`,
         ``,
         `${prompt}<span style="color:${p.ui.cursor}">▌</span>`,
     ];
@@ -654,7 +656,7 @@ function buildHelpContent(): string {
           <ul class="help-list">
             <li><strong>VS Code</strong> — Simulated editor with all color tokens applied: titlebar, activity bar, sidebar, editor, and status bar. The <em>accent color</em> appears on window borders, focus rings, and badges.</li>
             <li><strong>JetBrains IDE</strong> — Simulated IntelliJ-style editor (classic layout). The accent color drives hyperlinks and identifier-under-caret highlights in the ICLS scheme.</li>
-            <li><strong>JetBrains Islands</strong> — Simulated IntelliJ New UI with the Islands layout: each panel floats as a separate rounded card over a desktop background. Requires a <em>.theme.json</em> in addition to the <em>.icls</em> color scheme.</li>
+            <li><strong>JetBrains Islands</strong> — Simulated IntelliJ New UI with the Islands layout: each panel floats as a separate rounded card over a desktop background. Uses a dedicated <em>.theme.json</em> with <code>parentTheme: "Islands Dark/Light"</code> plus a matching <em>-islands.icls</em> color scheme. The theme automatically handles <strong>Compact Mode</strong> via <code>Island.arc.compact</code> and <code>Island.borderWidth.compact</code> keys (activated when the IDE's Compact Mode is enabled).</li>
             <li><strong>macOS Terminal</strong> — Simulated terminal with ANSI 16-color output rendered in context, including all bright variants.</li>
           </ul>
         </div>
@@ -714,7 +716,7 @@ function buildHelpContent(): string {
           <ul class="help-list">
             <li><strong>VS Code</strong> — Copy <em>dist/vscode/*.json</em> to your themes folder, then open <em>Preferences: Color Theme</em> and search <em>Equinox</em>.</li>
             <li><strong>JetBrains (classic)</strong> — Copy <em>dist/jetbrains/*.icls</em> to your IDE's <em>colors/</em> folder, then go to <em>Settings → Editor → Color Scheme</em>.</li>
-            <li><strong>JetBrains Islands (New UI)</strong> — Copy <em>dist/jetbrains/*-islands.icls</em> to <em>colors/</em> and <em>dist/jetbrains/themes/*.theme.json</em> to <em>themes/</em>. Enable <em>New UI</em> and select Equinox in <em>Settings → Appearance → Theme</em>.</li>
+            <li><strong>JetBrains Islands (New UI, 2025.3+)</strong> — Copy <em>dist/jetbrains/*-islands.icls</em> to <em>colors/</em> and the matching <em>dist/jetbrains/themes/*-islands.theme.json</em> to <em>themes/</em>. Select an <em>Equinox … Islands</em> theme in <em>Settings → Appearance → Theme</em> and the matching Islands color scheme in <em>Settings → Editor → Color Scheme</em>. Compact Mode support is automatic.</li>
             <li><strong>macOS Terminal</strong> — Double-click any <em>.terminal</em> file in <em>dist/terminal/</em> and set it as default in <em>Terminal → Preferences → Profiles</em>.</li>
           </ul>
         </div>

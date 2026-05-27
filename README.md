@@ -130,7 +130,14 @@ Open VS Code → `Preferences: Color Theme` → search "Equinox".
 
 ### JetBrains IDEs
 
-**Classic UI** (copy `.icls` color schemes):
+After installing:
+
+1. **Settings → Appearance → Theme** → select the desired Equinox variant (changes the IDE UI).
+2. **Settings → Editor → Color Scheme** → select the **matching Equinox scheme** (same name as the theme chosen above).
+
+> The editor color scheme does **not** change automatically when switching UI themes — step 2 is always required.
+
+**Manual install — Classic UI** (color scheme only):
 
 ```bash
 cp dist/jetbrains/*.icls ~/Library/Application\ Support/JetBrains/*/colors/
@@ -138,19 +145,19 @@ cp dist/jetbrains/*.icls ~/Library/Application\ Support/JetBrains/*/colors/
 # Windows: %APPDATA%\JetBrains\<IDE>\colors\
 ```
 
-Go to **Settings → Editor → Color Scheme** and select the desired Equinox variant.
+Then go to **Settings → Editor → Color Scheme** and select the desired Equinox variant.
 
-**New UI / Islands** (copy both `.icls` and `.theme.json`):
+**Manual install — Islands UI** (New UI floating-panel layout, 2025.3+):
 
 ```bash
-# Color schemes (editor)
+# Color schemes (editor, includes Islands-specific desktop color)
 cp dist/jetbrains/*-islands.icls ~/Library/Application\ Support/JetBrains/*/colors/
 
-# UI theme (New UI panels, Islands layout, Desktop background)
+# UI themes — both classic and Islands .theme.json
 cp dist/jetbrains/themes/*.theme.json ~/Library/Application\ Support/JetBrains/*/themes/
 ```
 
-Enable **New UI** in **Settings → Appearance** and select the Equinox theme in **Settings → Appearance → Theme**. The Islands panel layout activates automatically when the New UI is enabled.
+In **Settings → Appearance → Theme** select an **Equinox … Islands** variant, then in **Settings → Editor → Color Scheme** select the matching **Equinox … Islands** scheme. The `Island.arc.compact` / `Island.borderWidth.compact` keys inside each Islands theme activate automatically when the IDE's **Compact Mode** is enabled.
 
 ### macOS Terminal
 
@@ -222,7 +229,7 @@ src/platforms/
   vscode.ts    → dist/vscode/*.json
   jetbrains.ts → dist/jetbrains/*.icls
                → dist/jetbrains/*-islands.icls
-               → dist/jetbrains/themes/*.theme.json
+               → dist/jetbrains/themes/*.theme.json       (4 classic + 4 Islands)
   terminal.ts  → [profile data] → scripts/generate-terminal.py
                                 → dist/terminal/*.terminal
        ↓
@@ -305,4 +312,4 @@ vsce package
 # produces equinox-colors-X.Y.Z.vsix — upload to marketplace.visualstudio.com
 ```
 
-**JetBrains quick reference:** copy `dist/jetbrains/` and `dist/jetbrains/themes/` into the plugin JAR structure described in `marketplace/jetbrains/README.md`, then ZIP and upload to plugins.jetbrains.com.
+**JetBrains quick reference:** run `npm run build && npm run package:jetbrains` — output is `dist/marketplace/jetbrains/equinox-colors-X.Y.Z.zip`. Upload to plugins.jetbrains.com as a new version.

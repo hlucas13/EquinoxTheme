@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
     generateJetBrainsColorScheme,
     generateJetBrainsIslandsColorScheme,
+    generateJetBrainsIslandsTheme,
     generateJetBrainsTheme,
     jetBrainsColorSchemeToXml,
     jetBrainsThemeToJson,
@@ -167,7 +168,7 @@ describe('generateJetBrainsTheme', () => {
         expect(theme.ui['Desktop.background']).toMatch(/^#[0-9a-fA-F]{6,8}$/);
     });
 
-    it('editorScheme follows /colors/{slug}.icls pattern', () => {
+    it('editorScheme is a classpath resource path (/colors/{slug}.icls)', () => {
         const theme = generateJetBrainsTheme(equinoxDarkModern);
         expect(theme.editorScheme).toMatch(/^\/colors\/.+\.icls$/);
     });
@@ -207,5 +208,114 @@ describe('jetBrainsThemeToJson', () => {
             const theme = generateJetBrainsTheme(variant);
             expect(() => jetBrainsThemeToJson(theme)).not.toThrow();
         }
+    });
+});
+
+describe('generateJetBrainsIslandsTheme', () => {
+    it('name ends with " Islands"', () => {
+        const theme = generateJetBrainsIslandsTheme(equinoxDarkModern);
+        expect(theme.name).toBe(`${equinoxDarkModern.name} Islands`);
+    });
+
+    it('dark variants have dark=true', () => {
+        expect(generateJetBrainsIslandsTheme(equinoxDarkModern).dark).toBe(
+            true
+        );
+        expect(generateJetBrainsIslandsTheme(equinoxDarkContrast).dark).toBe(
+            true
+        );
+    });
+
+    it('light variants have dark=false', () => {
+        expect(generateJetBrainsIslandsTheme(equinoxLightSoft).dark).toBe(
+            false
+        );
+        expect(generateJetBrainsIslandsTheme(equinoxLightContrast).dark).toBe(
+            false
+        );
+    });
+
+    it('dark variants have parentTheme "Islands Dark"', () => {
+        expect(
+            generateJetBrainsIslandsTheme(equinoxDarkModern).parentTheme
+        ).toBe('Islands Dark');
+        expect(
+            generateJetBrainsIslandsTheme(equinoxDarkContrast).parentTheme
+        ).toBe('Islands Dark');
+    });
+
+    it('light variants have parentTheme "Islands Light"', () => {
+        expect(
+            generateJetBrainsIslandsTheme(equinoxLightSoft).parentTheme
+        ).toBe('Islands Light');
+        expect(
+            generateJetBrainsIslandsTheme(equinoxLightContrast).parentTheme
+        ).toBe('Islands Light');
+    });
+
+    it('editorScheme is the scheme name (not a file path)', () => {
+        const theme = generateJetBrainsIslandsTheme(equinoxDarkModern);
+        expect(theme.editorScheme).toBe(`${equinoxDarkModern.name} Islands`);
+        expect(theme.editorScheme).not.toMatch(/^\/|\.icls$/);
+    });
+
+    it('ui contains Islands key set to "1"', () => {
+        const theme = generateJetBrainsIslandsTheme(equinoxDarkModern);
+        expect(theme.ui['Islands']).toBe('1');
+    });
+
+    it('ui contains Island.arc and Island.arc.compact keys', () => {
+        const theme = generateJetBrainsIslandsTheme(equinoxDarkModern);
+        expect(theme.ui).toHaveProperty('Island.arc');
+        expect(theme.ui).toHaveProperty('Island.arc.compact');
+    });
+
+    it('ui contains Island.borderWidth and Island.borderWidth.compact keys', () => {
+        const theme = generateJetBrainsIslandsTheme(equinoxDarkModern);
+        expect(theme.ui).toHaveProperty('Island.borderWidth');
+        expect(theme.ui).toHaveProperty('Island.borderWidth.compact');
+    });
+
+    it('ui contains Island.borderColor matching editor background', () => {
+        const theme = generateJetBrainsIslandsTheme(equinoxDarkModern);
+        expect(theme.ui).toHaveProperty('Island.borderColor');
+        expect(theme.ui['Island.borderColor']).toBe(
+            equinoxDarkModern.palette.editor.background
+        );
+    });
+
+    it('ui contains transparent sidebar border keys', () => {
+        const theme = generateJetBrainsIslandsTheme(equinoxDarkModern);
+        expect(theme.ui['StatusBar.borderColor']).toBe('#00000000');
+        expect(theme.ui['ToolWindow.Stripe.borderColor']).toBe('#00000000');
+        expect(theme.ui['MainToolbar.borderColor']).toBe('#00000000');
+    });
+
+    it('ui contains MainWindow.background (desktop between islands)', () => {
+        const theme = generateJetBrainsIslandsTheme(equinoxDarkModern);
+        expect(theme.ui).toHaveProperty('MainWindow.background');
+        expect(theme.ui['MainWindow.background']).toMatch(
+            /^#[0-9a-fA-F]{6,8}$/
+        );
+    });
+
+    it('icons.ColorPalette has Actions.Red entry', () => {
+        const theme = generateJetBrainsIslandsTheme(equinoxDarkModern);
+        expect(theme.icons.ColorPalette).toHaveProperty('Actions.Red');
+    });
+
+    it('generates valid Islands UI themes for all 4 variants without throwing', () => {
+        for (const variant of allVariants) {
+            expect(() =>
+                generateJetBrainsIslandsTheme(variant)
+            ).not.toThrow();
+        }
+    });
+
+    it('serialises to valid JSON with parentTheme present', () => {
+        const theme = generateJetBrainsIslandsTheme(equinoxDarkModern);
+        const parsed = JSON.parse(jetBrainsThemeToJson(theme));
+        expect(parsed).toHaveProperty('parentTheme');
+        expect(parsed.parentTheme).toBe('Islands Dark');
     });
 });

@@ -10,6 +10,7 @@ import * as path from 'node:path';
 import {
     generateJetBrainsColorScheme,
     generateJetBrainsIslandsColorScheme,
+    generateJetBrainsIslandsTheme,
     generateJetBrainsTheme,
     jetBrainsColorSchemeToXml,
     jetBrainsThemeToJson,
@@ -87,7 +88,7 @@ function buildJetBrainsSchemes() {
         );
         console.log(`  ✓ ${variant.name} Islands`);
 
-        // UI theme (.theme.json) — supports both classic and New UI / Islands
+        // UI theme (.theme.json) — classic / non-Islands layout
         const theme = generateJetBrainsTheme(variant);
         const themeJson = jetBrainsThemeToJson(theme);
         fs.writeFileSync(
@@ -96,6 +97,16 @@ function buildJetBrainsSchemes() {
             'utf-8'
         );
         console.log(`  ✓ ${variant.name} UI theme`);
+
+        // Islands UI theme (.theme.json) — New UI floating-panel layout
+        const islandsTheme = generateJetBrainsIslandsTheme(variant);
+        const islandsThemeJson = jetBrainsThemeToJson(islandsTheme);
+        fs.writeFileSync(
+            path.join(jetbrainsThemesDir, `${slug}-islands.theme.json`),
+            islandsThemeJson,
+            'utf-8'
+        );
+        console.log(`  ✓ ${variant.name} Islands UI theme`);
     });
 }
 

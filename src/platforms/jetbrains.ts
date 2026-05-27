@@ -24,6 +24,8 @@ export interface JetBrainsTheme {
     dark: boolean;
     author: string;
     editorScheme: string;
+    /** Inherit defaults from a built-in JetBrains theme (e.g. "Islands Dark") */
+    parentTheme?: string;
     /** Flat map of UI property key → hex color string (with #) */
     ui: Record<string, string>;
     /** Icon color palette overrides */
@@ -849,4 +851,209 @@ export function generateJetBrainsTheme(
 
 export function jetBrainsThemeToJson(theme: JetBrainsTheme): string {
     return JSON.stringify(theme, null, 2) + '\n';
+}
+
+// ============================================================================
+// JETBRAINS ISLANDS UI THEME (.theme.json)
+// Separate theme entry for the New UI / Islands floating-panel layout.
+// Inherits from "Islands Dark" / "Islands Light" built-in parent theme and
+// adds Equinox colours on top.  editorScheme references the Islands .icls by
+// name so JetBrains applies it automatically when the user selects this theme.
+// ============================================================================
+
+export function generateJetBrainsIslandsTheme(
+    variant: EquinoxVariant
+): JetBrainsTheme {
+    const isDark = variant.name.includes('Dark');
+    const ansi = isDark ? PALETTE.ansi.dark : PALETTE.ansi.light;
+    const status = isDark ? PALETTE.status.dark : PALETTE.status.light;
+
+    const p = variant.palette;
+    const editorBg = p.editor.background;
+    const panelBg = p.toolbar.background;
+    const fg = p.editor.foreground;
+    const border = p.ui.border;
+    const accent = p.ui.focus;
+    const selection = p.ui.selection;
+    const lineNumber = p.ui.lineNumber;
+    const desktopHex = `#${islandsDesktopColor(variant)}`;
+
+    return {
+        name: `${variant.name} Islands`,
+        dark: isDark,
+        author: 'Equinox Team',
+        // editorScheme = scheme NAME (not path) — required by Islands docs
+        editorScheme: `${variant.name} Islands`,
+        parentTheme: isDark ? 'Islands Dark' : 'Islands Light',
+        ui: {
+            // ── Islands layout ────────────────────────────────────────────────
+            Islands: '1',
+            'Island.arc': '20',
+            'Island.arc.compact': '16',
+            'Island.borderWidth': '5',
+            'Island.borderWidth.compact': '4',
+            // Same colour as tool-window background so islands have no visible border
+            'Island.borderColor': editorBg,
+            'Island.inactiveAlpha': '0.44',
+
+            // ── Desktop (wallpaper behind floating islands) ───────────────────
+            'Desktop.background': desktopHex,
+            'MainWindow.background': desktopHex,
+
+            // ── Hide sidebar borders (Islands design spec) ────────────────────
+            'StatusBar.borderColor': '#00000000',
+            'ToolWindow.Stripe.borderColor': '#00000000',
+            'MainToolbar.borderColor': '#00000000',
+
+            // ── Base panels ───────────────────────────────────────────────────
+            'Panel.background': panelBg,
+            'Window.background': panelBg,
+
+            // ── Tool windows ──────────────────────────────────────────────────
+            'ToolWindow.background': editorBg,
+            'ToolWindow.Header.background': panelBg,
+            'ToolWindow.Header.borderColor': border,
+            'ToolWindow.HeaderCloseButton.background': 'transparent',
+            'ToolWindow.inactive.background': editorBg,
+
+            // ── Editor ────────────────────────────────────────────────────────
+            'Editor.background': editorBg,
+            'EditorTabs.background': panelBg,
+            'EditorTabs.selectedBackground': editorBg,
+            'EditorTabs.underlineColor': accent,
+            'EditorTabs.underlinedBorderColor': accent,
+            'EditorTabs.inactiveUnderlinedTabBorderColor': border,
+            'EditorTabs.underlinedTabBackground': editorBg,
+            'EditorTabs.inactiveUnderlinedTabBackground': panelBg,
+            'EditorTabs.inactiveUnderlineColor': border,
+            'EditorTabs.borderColor': border,
+            'Editor.caretRowColor': selection,
+
+            // ── Component ─────────────────────────────────────────────────────
+            'Component.focusColor': accent,
+            'Component.borderColor': border,
+            'Component.disabledBorderColor': border,
+            'Component.errorFocusColor': status.error,
+            'Component.focusedBorderColor': accent,
+            'Component.inactiveErrorFocusColor': `${status.error}80`,
+            'Component.inactiveWarningFocusColor': `${status.warning}80`,
+            'Component.warningFocusColor': status.warning,
+
+            // ── Buttons ───────────────────────────────────────────────────────
+            'Button.background': panelBg,
+            'Button.foreground': fg,
+            'Button.focusedBorderColor': accent,
+            'Button.default.background': accent,
+            'Button.default.foreground': '#ffffff',
+            'Button.default.focusColor': accent,
+            'Button.default.startBorderColor': accent,
+            'Button.default.endBorderColor': accent,
+            'Button.startBorderColor': border,
+            'Button.endBorderColor': border,
+
+            // ── Menu ──────────────────────────────────────────────────────────
+            'Menu.background': panelBg,
+            'Menu.foreground': fg,
+            'Menu.selectionBackground': selection,
+            'Menu.selectionForeground': fg,
+            'Menu.borderColor': border,
+            'MenuItem.background': panelBg,
+            'MenuItem.foreground': fg,
+            'MenuItem.selectionBackground': selection,
+            'MenuItem.selectionForeground': fg,
+            'PopupMenu.background': panelBg,
+            'PopupMenu.borderColor': border,
+
+            // ── Text / Input ──────────────────────────────────────────────────
+            'TextField.background': editorBg,
+            'TextField.foreground': fg,
+            'TextField.borderColor': border,
+            'TextField.focusedBorderColor': accent,
+            'TextArea.background': editorBg,
+            'TextArea.foreground': fg,
+            'Label.foreground': fg,
+            'Label.disabledForeground': lineNumber,
+
+            // ── Tabs ──────────────────────────────────────────────────────────
+            'TabbedPane.background': panelBg,
+            'TabbedPane.foreground': fg,
+            'TabbedPane.selectedForeground': fg,
+            'TabbedPane.underlineColor': accent,
+            'TabbedPane.contentAreaColor': border,
+
+            // ── Tree / List ───────────────────────────────────────────────────
+            'Tree.background': editorBg,
+            'Tree.foreground': fg,
+            'Tree.selectionBackground': selection,
+            'Tree.selectionForeground': fg,
+            'Tree.selectionInactiveBackground': `${selection}88`,
+            'Tree.rowHeight': '0',
+            'List.background': editorBg,
+            'List.foreground': fg,
+            'List.selectionBackground': selection,
+            'List.selectionForeground': fg,
+
+            // ── ScrollBar ─────────────────────────────────────────────────────
+            'ScrollBar.background': panelBg,
+            'ScrollBar.thumbColor': `${lineNumber}60`,
+            'ScrollBar.thumbBorderColor': 'transparent',
+            'ScrollBar.hoverThumbColor': `${lineNumber}aa`,
+            'ScrollBar.trackColor': 'transparent',
+
+            // ── Toolbar ───────────────────────────────────────────────────────
+            'MainToolbar.background': panelBg,
+            'ToolBar.background': panelBg,
+            'ToolBar.borderColor': border,
+            'RunWidget.background': panelBg,
+
+            // ── Status bar ────────────────────────────────────────────────────
+            'StatusBar.background': panelBg,
+            'StatusBar.hoverBackground': selection,
+            'StatusBar.foreground': fg,
+
+            // ── Links ─────────────────────────────────────────────────────────
+            'Link.activeForeground': accent,
+            'Link.hoverForeground': accent,
+            'Link.pressedForeground': accent,
+            'Link.visitedForeground': `${accent}cc`,
+
+            // ── Progress bar ──────────────────────────────────────────────────
+            'ProgressBar.progressColor': accent,
+            'ProgressBar.indeterminateStartColor': accent,
+            'ProgressBar.indeterminateEndColor': `${accent}80`,
+            'ProgressBar.trackColor': selection,
+
+            // ── Notification / Tooltip ────────────────────────────────────────
+            'Notification.background': panelBg,
+            'Notification.borderColor': border,
+            'ToolTip.background': panelBg,
+            'ToolTip.foreground': fg,
+            'ToolTip.borderColor': border,
+
+            // ── Badge / Counter ───────────────────────────────────────────────
+            'Counter.background': accent,
+            'Counter.foreground': '#ffffff',
+
+            // ── Git / VCS ─────────────────────────────────────────────────────
+            'VersionControl.FileHistory.Commit.selectedBackground': selection,
+        },
+        icons: {
+            ColorPalette: {
+                'Actions.Red': status.error,
+                'Actions.Yellow': status.warning,
+                'Actions.Green': ansi.green,
+                'Actions.Blue': accent,
+                'Actions.Grey': lineNumber,
+                'Actions.GreyInline': lineNumber,
+                'Objects.Red': status.error,
+                'Objects.Yellow': status.warning,
+                'Objects.Green': ansi.green,
+                'Objects.Blue': accent,
+                'Objects.Purple': ansi.magenta,
+                'Objects.Pink': ansi.brightMagenta,
+                'Objects.Teal': ansi.cyan,
+                'Objects.Grey': lineNumber,
+            },
+        },
+    };
 }
