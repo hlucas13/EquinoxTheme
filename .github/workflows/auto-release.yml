@@ -95,11 +95,8 @@ jobs:
               with:
                   tag_name: ${{ steps.version.outputs.tag }}
                   name: Equinox Colors ${{ steps.version.outputs.tag }}
+                  generate_release_notes: true
                   body: |
-                      ## Equinox Colors ${{ steps.version.outputs.tag }}
-
-                      Multi-platform ergonomic theme for VS Code, JetBrains IDEs, and macOS Terminal.
-
                       ### Downloads
 
                       | Package | Contents |
@@ -108,14 +105,6 @@ jobs:
                       | `equinox-vscode-*.zip` | VS Code `.json` theme files |
                       | `equinox-jetbrains-*.zip` | JetBrains `.icls` color schemes |
                       | `equinox-terminal-*.zip` | macOS Terminal `.terminal` profiles |
-
-                      ### Installation
-
-                      **VS Code:** Copy the `.json` files to your VS Code themes directory or install via the marketplace.
-
-                      **JetBrains:** Go to `Settings → Editor → Color Scheme → Import Scheme` and select the `.icls` file.
-
-                      **macOS Terminal:** Double-click the `.terminal` file to import the profile.
                   files: |
                       equinox-all-${{ steps.version.outputs.tag }}.zip
                       equinox-vscode-${{ steps.version.outputs.tag }}.zip
