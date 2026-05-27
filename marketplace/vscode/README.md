@@ -3,16 +3,16 @@
 A carefully crafted color theme for developers who spend long hours in their editor. Equinox Colors is built around two principles: **ergonomic contrast** and **visual calm** — every color pair meets **WCAG AAA (7:1)** contrast, and the palette avoids harsh saturation that strains the eyes over time.
 
 **Dark Modern**
-![Equinox Dark Modern](./screenshots/vscode-dark.png)
+![Equinox Dark Modern](https://raw.githubusercontent.com/hlucas13/EquinoxTheme/main/marketplace/vscode/screenshots/vscode-dark.png)
 
 **Dark Contrast**
-![Equinox Dark Contrast](./screenshots/vscode-dark-contrast.png)
+![Equinox Dark Contrast](https://raw.githubusercontent.com/hlucas13/EquinoxTheme/main/marketplace/vscode/screenshots/vscode-dark-contrast.png)
 
 **Light Soft**
-![Equinox Light Soft](./screenshots/vscode-light.png)
+![Equinox Light Soft](https://raw.githubusercontent.com/hlucas13/EquinoxTheme/main/marketplace/vscode/screenshots/vscode-light.png)
 
 **Light Contrast**
-![Equinox Light Contrast](./screenshots/vscode-light-contrast.png)
+![Equinox Light Contrast](https://raw.githubusercontent.com/hlucas13/EquinoxTheme/main/marketplace/vscode/screenshots/vscode-light-contrast.png)
 
 ---
 

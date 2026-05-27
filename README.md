@@ -226,13 +226,15 @@ playground/main.ts         ← consumes variants directly (no dist/ needed)
 
 ### CI / CD
 
-| Workflow           | Trigger            | Action                                                                                 |
-| ------------------ | ------------------ | -------------------------------------------------------------------------------------- |
-| `ci.yml`           | Push / PR → `main` | Typecheck, lint, build                                                                 |
-| `auto-release.yml` | Push → `main`      | Bumps patch version, builds, publishes GitHub Release + VS Code Marketplace (VSCE_PAT) |
-| `release.yml`      | Tag `v*`           | Builds and publishes release for a specific version tag                                |
+| Workflow           | Trigger                                                                             | Action                                                                                                     |
+| ------------------ | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `ci.yml`           | Push / PR → `main`                                                                  | Typecheck, lint, build                                                                                     |
+| `auto-release.yml` | Push → `main` (changes in `src/`, `marketplace/`, `playground/`) or manual dispatch | Bumps versions, builds, creates GitHub Release with auto-generated changelog + VS Code Marketplace publish |
+| `release.yml`      | Tag `v*`                                                                            | Builds and publishes release for a specific version tag                                                    |
 
 > **VS Code auto-publish** requires a `VSCE_PAT` repository secret (Personal Access Token from [marketplace.visualstudio.com/manage](https://marketplace.visualstudio.com/manage)). Add it under **Settings → Secrets and variables → Actions**.
+>
+> **Manual release**: go to **Actions → Auto Release → Run workflow** to trigger a release at any time without pushing code changes.
 
 ### Code Quality
 
