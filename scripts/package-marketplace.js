@@ -254,7 +254,9 @@ async function packageJetBrains() {
         archive.on('error', reject);
         archive.pipe(output);
         // Only include the lib/ folder — META-INF/plugin.xml lives inside the JAR
-        archive.file(jarPath, { name: 'equinox-colors/lib/equinox-colors.jar' });
+        archive.file(jarPath, {
+            name: 'equinox-colors/lib/equinox-colors.jar',
+        });
         archive.finalize();
     });
 }
