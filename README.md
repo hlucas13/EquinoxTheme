@@ -1,365 +1,253 @@
-# 🎨 Equinox Theme
+# Equinox Theme
 
-> A production-ready, multi-platform ergonomic theme system for developers spending 8+ hours a day coding.
+A multi-platform ergonomic theme system for VS Code, JetBrains IDEs, and macOS Terminal. One TypeScript source of truth compiles 4 variants across all 3 platforms simultaneously. Every color combination meets WCAG AAA (7:1) contrast.
 
-Equinox is a unified theme generator that produces fully functional, WCAG AAA-compliant color schemes for **VS Code**, **JetBrains IDEs** (IntelliJ IDEA, WebStorm, PyCharm, GoLand, etc.), and **macOS Terminal**. It eliminates cognitive fatigue, prevents astigmatism stimulation (halation), and ensures visual ergonomics through scientifically-grounded color psychology and contrast standards.
+## Features
 
-## 🌟 Features
+- **4 variants**: Dark Modern, Dark Contrast, Light Soft, Light Contrast
+- **3 platforms**: VS Code (JSON), JetBrains (ICLS + theme.json), macOS Terminal (plist)
+- **JetBrains Islands / New UI**: each variant ships an Islands color scheme (`.icls`) and a full UI theme (`.theme.json`) for the floating-panel New UI layout
+- **Accent color** propagated to `window.activeBorder`/`window.inactiveBorder` (VS Code) and hyperlinks/identifier highlights (JetBrains)
+- **WCAG AAA**: 7:1 minimum contrast for all text/background combinations
+- **Single source of truth**: `src/colors/palette.ts` drives every output file
+- **Interactive playground**: Liquid Glass UI with live theme preview including Islands layout
+- **Marketplace ready**: pre-built `marketplace/vscode/` and `marketplace/jetbrains/` directories with all submission metadata
 
-- **4 Expertly-Crafted Variants**: Dark Modern, Dark Contrast, Light Soft, Light Contrast
-- **Universal Language Support**: Works flawlessly with TypeScript, JavaScript, Python, Java, Kotlin, Go, Rust, C#, HTML, CSS, YAML, SQL, and more
-- **WCAG AAA Compliance**: Every color combination strictly adheres to WCAG AAA contrast requirements (7:1 minimum)
-- **Anti-Fatigue Design**: Carefully selected palette to reduce eye strain and cognitive load during extended development sessions
-- **Split & Unified Backgrounds**: Choose between unified themes (seamless) or split backgrounds (UI/Editor distinction)
-- **3-Platform Compilation**: Single source of truth generates themes for all major platforms simultaneously
-- **Production-Ready**: Pre-commit hooks, linting, formatting, and conventional commits out of the box
-- **Zero Dependencies**: Compiles from pure TypeScript with no runtime dependencies
+## Variants
 
-## 📋 The 4 Variants
+| Variant            | Style   | Background                          | Best for                                     |
+| ------------------ | ------- | ----------------------------------- | -------------------------------------------- |
+| **Dark Modern**    | Unified | `#1a1f2e` — slate-blue              | Extended sessions, minimal context switching |
+| **Dark Contrast**  | Split   | `#0f1419` editor / `#13141c` panels | Complex navigation, clear UI/editor boundary |
+| **Light Soft**     | Unified | `#f5f3f0` — cream-white             | Bright rooms, long reading sessions          |
+| **Light Contrast** | Split   | `#faf9f7` editor / `#ede9e3` panels | Maximum architectural depth in light mode    |
 
-### 1. **Equinox Dark Modern** (Unified)
-
-- **Best for**: Extended coding sessions with minimal context switching
-- **Background**: `#1a1f2e` (deeply soothing dark slate-blue)
-- **Text**: `#e8eef7` (crisp soft off-white)
-- **Philosophy**: Unified environment reduces visual noise; perfect contrast without halation
-
-### 2. **Equinox Dark Contrast** (Split)
-
-- **Best for**: Complex IDE navigation requiring clear UI/Editor boundaries
-- **Editor**: `#0f1419` (ultra-deep restful dark)
-- **UI/Toolbars**: `#16192e` (slightly lighter structural tone)
-- **Text**: `#e8eef7` (consistent crisp foreground)
-- **Philosophy**: Architectural clarity with edge definition for faster visual parsing
-
-### 3. **Equinox Light Soft** (Unified)
-
-- **Best for**: Well-lit environments and developers preferring light themes without screen glare
-- **Background**: `#f5f3f0` (ultra-soft light gray/cream)
-- **Text**: `#2c2e3a` (deep navy-slate)
-- **Philosophy**: Eliminates paper-white glare blindness; maintains perfect contrast and sharpness
-
-### 4. **Equinox Light Contrast** (Split)
-
-- **Best for**: Bright environments requiring maximum UI/Editor distinction
-- **Editor**: `#faf9f7` (clean bright soft)
-- **UI/Toolbars**: `#ede9e3` (muted contrasting tone)
-- **Text**: `#2c2e3a` (consistent deep foreground)
-- **Philosophy**: Maximum architectural depth while maintaining ergonomic visual comfort
-
-## 🎯 Syntax Highlighting Philosophy
-
-Equinox uses **muted, ergonomic pastels** for dark themes and **rich, deep tones** for light themes. Every syntax token is carefully chosen to:
-
-- **Maintain readability** across 8+ hour coding sessions
-- **Prevent cognitive fatigue** through harmonious color relationships
-- **Ensure universal support** via standard semantic scopes (no language-specific hacks)
-- **Support accessibility** with verified WCAG AAA contrast ratios
-
-### Highlighted Token Categories
-
-- **Keywords** – Control flow, storage, declarations
-- **Functions** – Method calls, invocations, routine definitions
-- **Strings** – Literals, text content, quotes
-- **Variables** – Parameters, attributes, instance/class fields
-- **Numbers** – Constants, booleans, numeric values
-- **Comments** – Documentation, muted secondary text
-- **Operators** – Arithmetic, logical, comparison
-- **Types** – Classes, interfaces, enums, generics
-- **Markup** – HTML, XML, tags, attributes (universal CSS/YAML/JSON support)
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- **Node.js** 18.0.0 or higher
-- **npm** 9.0.0 or higher
-
-### Installation
+## Quick Start
 
 ```bash
 git clone https://github.com/yourusername/equinox-theme.git
 cd equinox-theme
 npm install
-```
-
-### Build Themes
-
-```bash
 npm run build
 ```
 
-This generates 12 theme files (4 variants × 3 platforms) into the `dist/` directory:
+**Requirements**: Node.js ≥ 18, npm ≥ 9.
+
+Build output:
 
 ```
 dist/
-├── vscode/
-│   ├── equinox-dark-modern.json
-│   ├── equinox-dark-contrast.json
-│   ├── equinox-light-soft.json
-│   └── equinox-light-contrast.json
+├── vscode/           # 4 × .json theme files
 ├── jetbrains/
-│   ├── equinox-dark-modern.icls
-│   ├── equinox-dark-contrast.icls
-│   ├── equinox-light-soft.icls
-│   └── equinox-light-contrast.icls
-├── terminal/
-│   ├── equinox-dark-modern.terminal
-│   ├── equinox-dark-contrast.terminal
-│   ├── equinox-light-soft.terminal
-│   └── equinox-light-contrast.terminal
+│   ├── *.icls        # 4 × classic color schemes
+│   ├── *-islands.icls # 4 × Islands color schemes (New UI)
+│   └── themes/       # 4 × .theme.json UI themes
+├── terminal/         # 4 × .terminal plist profiles
 └── manifest.json
 ```
 
-### Preview Themes in Interactive Playground
-
-Before installing themes, preview all variants in a live HTML/CSS playground:
+## Interactive Playground
 
 ```bash
-npm run playground
-# Opens http://localhost:8000 with interactive preview
+npm run playground   # starts Vite dev server at http://localhost:5173
 ```
 
-**Features**:
+The playground renders live simulations of VS Code, JetBrains (classic), JetBrains Islands (New UI), and macOS Terminal for each variant. The dock, menus, and modal use **physics-based Liquid Glass** — a displacement map generated from Snell's law that refracts the background through a convex glass bezel before applying backdrop blur.
 
-- 🎨 Switch between all 4 variants instantly
-- 🖥️ Simulate VS Code, JetBrains IDE, and Terminal interfaces
-- 🎯 Inspect individual colors (HEX, RGB, HSL)
-- 🔄 Auto-syncs with token updates (rebuild to refresh)
+**Playground preferences** are persisted in `localStorage`: dark mode defaults to your OS/browser preference on first visit, frosted glass defaults to off. Both settings are saved automatically after your first change.
 
-The playground consumes the exact same color source as your final themes, ensuring pixel-perfect accuracy.
+**Dock controls**:
 
-## 📖 Installation Guide by Platform
+- **Variant** — switch between all 4 theme variants
+- **Platform** — switch between VS Code, JetBrains IDE, JetBrains Islands, Terminal previews
+- **Settings** — toggle dark mode and frosted glass style; access Help & Wiki
 
-### VS Code
+The **JetBrains Islands** preview simulates the New UI floating-panel layout: each tool window renders as a separate rounded island over a darker desktop background, matching the visual result of installing both the `.icls` color scheme and the `.theme.json` UI theme.
 
-1. **Locate theme files**: Find all `.json` files in `dist/vscode/`
-2. **Copy to VS Code**:
+### Liquid Glass
 
-   ```bash
-   cp dist/vscode/*.json ~/.config/Code/User/themes/
-   # Or on macOS:
-   cp dist/vscode/*.json ~/Library/Application\ Support/Code/User/themes/
-   ```
+The UI chrome (dock, menus, modals, and toggles) is built around a physics-based Liquid Glass system, documented in the module `playground/glass-distortion.ts`.
 
-3. **Activate theme**:
-   - Open VS Code
-   - Go to **Settings** → **Theme** → **Color Theme**
-   - Select your preferred Equinox variant
+The implementation follows the refraction principles described in **[Liquid Glass — CSS & SVG](https://kube.io/blog/liquid-glass-css-svg/)** by Kube:
 
-**Alternative (via Command Palette)**:
+- **Snell's law refraction** — each pixel of the glass surface displaces the background according to the angle of refraction derived from the surface normal, using an index of refraction of **1.45** (borosilicate glass).
+- **Convex height profile** — the surface height function `h(t) = √t` models a curved glass lens that is thicker at the centre and tapers toward the rim.
+- **SVG displacement maps** — a `<feImage>` + `<feDisplacementMap>` filter pipeline applies the computed per-pixel displacement at runtime, replacing the old turbulence-noise approach with deterministic, physics-consistent distortion.
+- **Two filter instances** — `#glass-distortion-dock` (resized dynamically via `ResizeObserver`, `userSpaceOnUse`) and `#glass-distortion-panel` (`objectBoundingBox`, scales to any modal or menu).
+- **Progressive enhancement** — a `@supports (backdrop-filter: url(#x))` check unlocks the `backdrop-filter` compositing path on Chromium; all other browsers fall back to the base blur and tint layers.
+- **Convex specular hierarchy** — glass surfaces carry a three-layer inset `box-shadow` stack: primary top-left arc highlight → full perimeter rim → counter-specular depth shadow, matching the light model expected from a convex glass element.
 
-- Press `Cmd+Shift+P` (macOS) or `Ctrl+Shift+P` (Linux/Windows)
-- Type `Preferences: Color Theme`
-- Search for "Equinox"
-- Press Enter
+## Platform Installation
 
-### JetBrains IDEs (IntelliJ, WebStorm, PyCharm, GoLand, etc.)
+### VS Code (manual)
 
-1. **Locate theme files**: Find all `.icls` files in `dist/jetbrains/`
-2. **Copy to JetBrains config**:
+```bash
+cp dist/vscode/*.json ~/Library/Application\ Support/Code/User/themes/
+# Linux: ~/.config/Code/User/themes/
+```
 
-   ```bash
-   # On macOS:
-   cp dist/jetbrains/*.icls ~/Library/Application\ Support/JetBrains/*/colors/
-   
-   # On Linux:
-   cp dist/jetbrains/*.icls ~/.config/JetBrains/*/colors/
-   
-   # On Windows:
-   copy dist\jetbrains\*.icls %APPDATA%\JetBrains\<IDE>\colors\
-   ```
+Open VS Code → `Preferences: Color Theme` → search "Equinox".
 
-   *(Replace `<IDE>` with your JetBrains IDE folder, e.g., `IntelliJIdea2024.1`, `WebStorm2024.1`)*
+### JetBrains IDEs
 
-3. **Activate theme**:
-   - Open your JetBrains IDE
-   - Go to **Settings/Preferences** → **Appearance & Behavior** → **Appearance**
-   - Under **Theme**, select your preferred Equinox variant
-   - Click **Apply**
+**Classic UI** (copy `.icls` color schemes):
 
-4. **Per-Project Override** (optional):
-   - Go to **Settings** → **Editor** → **Color Scheme**
-   - Select your preferred Equinox scheme
+```bash
+cp dist/jetbrains/*.icls ~/Library/Application\ Support/JetBrains/*/colors/
+# Linux: ~/.config/JetBrains/*/colors/
+# Windows: %APPDATA%\JetBrains\<IDE>\colors\
+```
+
+Go to **Settings → Editor → Color Scheme** and select the desired Equinox variant.
+
+**New UI / Islands** (copy both `.icls` and `.theme.json`):
+
+```bash
+# Color schemes (editor)
+cp dist/jetbrains/*-islands.icls ~/Library/Application\ Support/JetBrains/*/colors/
+
+# UI theme (New UI panels, Islands layout, Desktop background)
+cp dist/jetbrains/themes/*.theme.json ~/Library/Application\ Support/JetBrains/*/themes/
+```
+
+Enable **New UI** in **Settings → Appearance** and select the Equinox theme in **Settings → Appearance → Theme**. The Islands panel layout activates automatically when the New UI is enabled.
 
 ### macOS Terminal
 
-1. **Locate theme files**: Find all `.terminal` files in `dist/terminal/`
-2. **Double-click to import**:
-   - Find a `.terminal` file in Finder
-   - Double-click it
-   - Terminal will prompt: "Are you sure you want to open this profile?"
-   - Click **Open**
+Double-click any `.terminal` file in `dist/terminal/` to import it, then set as default in **Terminal → Preferences → Profiles**.
 
-3. **Activate theme**:
-   - Open **Terminal.app**
-   - Go to **Terminal** → **Preferences** → **Profiles**
-   - Select your imported Equinox variant from the list
-   - Click the **Default** button to set it as your default profile
-
-4. **Manual Import** (if double-click doesn't work):
-
-   ```bash
-   open dist/terminal/equinox-dark-modern.terminal
-   ```
-
-## 🛠 Development
+## Development
 
 ### Project Structure
 
 ```
 equinox-theme/
 ├── src/
-│   ├── tokens.ts              # Design token definitions & color palettes
-│   ├── build.ts               # Build orchestration & compilation
-│   ├── playground-export.ts   # Export tokens as JSON for browser playground
-│   └── platforms/
-│       ├── vscode.ts          # VS Code JSON theme generator
-│       ├── jetbrains.ts       # JetBrains ICLS XML generator
-│       └── terminal.ts        # macOS Terminal plist generator
+│   ├── colors/
+│   │   └── palette.ts          # Single source of truth — all hex values
+│   ├── themes/
+│   │   └── variants.ts         # 4 typed EquinoxVariant objects
+│   ├── platforms/
+│   │   ├── vscode.ts           # VS Code JSON theme generator
+│   │   ├── jetbrains.ts        # JetBrains ICLS + Islands + .theme.json generators
+│   │   └── terminal.ts         # macOS Terminal plist generator
+│   └── build.ts                # Build orchestrator → dist/
 ├── playground/
-│   ├── index.html             # Interactive HTML playground
-│   ├── styles.css             # Platform simulations + UI styling
-│   ├── script.js              # Theme switcher & color inspector
-│   ├── README.md              # Playground-specific documentation
-│   └── themes.json            # Generated color data (auto-built)
-├── .husky/
-│   ├── pre-commit            # Prettier + lint-staged hook
-│   └── commit-msg            # Commitlint hook
-├── package.json
+│   ├── index.html              # Liquid Glass UI shell
+│   ├── main.ts                 # Dock controls + platform renderers (incl. Islands)
+│   ├── glass-distortion.ts     # Snell's-law displacement map generator
+│   └── styles.css              # Glass tokens, dock, liquid toggle, modal, Islands layout
+├── scripts/
+│   └── generate-icons.js       # SVG → PNG at 11 marketplace sizes (uses sharp)
+├── marketplace/
+│   ├── vscode/                 # VS Code extension metadata (package.json, .vscodeignore)
+│   └── jetbrains/              # JetBrains plugin metadata (plugin.xml)
+├── images/
+│   ├── icon.svg                # Master icon source
+│   └── icons/                  # Pre-generated PNGs (16–1024 px)
+├── tests/                      # Vitest unit + integration tests
+├── build.js                    # esbuild entry (compiles src/build.ts)
+├── vite.config.ts              # Playground dev server
 ├── tsconfig.json
-├── .prettierrc
+├── eslint.config.js
 ├── commitlint.config.js
-├── LICENSE
-└── README.md
+└── package.json
 ```
 
-### Playground Architecture
-
-The interactive playground ensures all themes stay synchronized with your color tokens:
-
-```
-tokens.ts (source of truth)
-    ↓
-playground-export.ts (TypeScript export)
-    ↓
-build.ts (npm run build)
-    ↓
-dist/playground/themes.json (generated)
-    ↓
-playground/script.js (loads and renders)
-    ↓
-Interactive HTML UI with live previews
-```
-
-**Key benefit**: Edit `src/tokens.ts` → Run `npm run build` → Refresh playground → See changes instantly across all 3 platform simulations.
-
-### Development Scripts
+### Scripts
 
 ```bash
-# Build themes once
-npm run build
-
-# Build themes and launch interactive playground
-npm run playground
-
-# Watch for TypeScript changes
-npm run dev
-
-# Clean build artifacts
-npm run clean
-
-# Pre-commit setup (auto-runs on first install)
-npm run prepare
+npm run build             # compile all themes → dist/
+npm run playground        # Vite dev server (playground)
+npm run icons             # generate PNG icons from images/icon.svg → images/icons/
+npm run typecheck         # tsc --noEmit
+npm run lint              # ESLint
+npm run test              # Vitest
+npm run clean             # rm -rf dist
+npm run package           # assemble both marketplace bundles (after build)
+npm run package:vscode    # VS Code .vsix only
+npm run package:jetbrains # JetBrains .zip only
 ```
 
-### Code Quality & Git Workflow
+### Architecture: Color Flow
 
-This project enforces strict code quality through automated hooks:
+```
+src/colors/palette.ts      ← edit colors here
+       ↓
+src/themes/variants.ts     ← typed EquinoxVariant objects
+       ↓
+src/platforms/
+  vscode.ts    → dist/vscode/*.json
+  jetbrains.ts → dist/jetbrains/*.icls
+               → dist/jetbrains/*-islands.icls
+               → dist/jetbrains/themes/*.theme.json
+  terminal.ts  → dist/terminal/*.terminal
+       ↓
+playground/main.ts         ← consumes variants directly (no dist/ needed)
+```
 
-- **Pre-commit Hook** (`npm run prepare` / husky):
-  - Runs Prettier on all staged `.ts`, `.json`, and `.md` files
-  - Ensures consistent formatting
+### Code Quality
 
-- **Commit Message Hook** (commitlint):
-  - Enforces Conventional Commits specification
-  - Blocks commits that don't follow the format:
+Pre-commit hooks run automatically on `git commit`:
+
+- **Prettier** formats all staged `.ts`, `.json`, `.md` files
+- **Commitlint** enforces [Conventional Commits](https://www.conventionalcommits.org/):
 
     ```
-    feat: add new feature
-    fix: resolve critical bug
-    docs: update documentation
-    chore: update dependencies
+    feat: add new variant
+    fix: correct accent hex value
+    docs: update installation steps
+    chore: bump dependencies
     ```
 
-### Example Workflow
+## Color Science & Accessibility
+
+- **WCAG AAA**: All text/background pairs verified at ≥ 7:1 contrast ratio
+- **Anti-halation**: No high-saturation neons; muted ergonomic pastels in dark mode, rich deep tones in light mode
+- **Hue spacing**: Sufficient perceptual distance between syntax colors to prevent confusion during long sessions
+- **Accent color**: Each variant exposes a single `ui.focus` accent propagated to focus rings, badges, status bars, window borders (VS Code), and hyperlinks (JetBrains)
+
+## Contributing
+
+1. Follow the existing code style (Prettier formats on commit)
+2. Use Conventional Commits
+3. Maintain WCAG AAA compliance for all new color combinations
+4. Run `npm run typecheck && npm run lint && npm run test` before opening a PR
+
+## License
+
+MIT — see [LICENSE](LICENSE).
+
+## Icon & Marketplace Assets
+
+The master icon lives at `images/icon.svg`.
+
+**Generate PNGs** (uses [sharp](https://sharp.pixelplumbing.com/), already installed as a devDependency):
 
 ```bash
-# Make changes to src/tokens.ts
-vim src/tokens.ts
-
-# Stage changes
-git add src/tokens.ts
-
-# Commit (pre-commit hook auto-formats, then commit-msg validates message)
-git commit -m "feat: add new color variant"
-# ✓ Pre-commit hook runs prettier
-# ✓ Commit message validated
-# ✓ Commit successful
+npm run icons
 ```
 
-## 🔬 Color Science & Accessibility
+This outputs 11 sizes (16, 32, 40, 48, 64, 80, 128, 200, 256, 512, 1024 px) to `images/icons/` and copies convenience copies of 128 and 256 px to `images/`.
 
-### WCAG AAA Compliance
+**Pre-generated icons** are committed to the repository under `images/icons/` so that CI and marketplace packaging do not require a separate step.
 
-Every color combination in Equinox meets or exceeds WCAG AAA standards:
+## Marketplace Submission
 
-- **Minimum contrast ratio**: 7:1 for normal text
-- **Large text (18pt+)**: 4.5:1
-- **Verified through**: WebAIM Contrast Checker, Stark plugin
+All submission metadata lives in `marketplace/`. See the README in each subdirectory for full packaging steps.
 
-### Anti-Fatigue Design
+| Platform              | Directory                | Format           | Tool           |
+| --------------------- | ------------------------ | ---------------- | -------------- |
+| VS Code Marketplace   | `marketplace/vscode/`    | VSIX             | `vsce package` |
+| JetBrains Marketplace | `marketplace/jetbrains/` | ZIP (plugin jar) | Manual ZIP     |
 
-The color selections follow established visual ergonomics research:
+**VS Code quick reference:**
 
-1. **Halation Prevention**: No harsh high-saturation neons that cause eye strain halos
-2. **Color Temperature Harmony**: Balanced warm/cool tones to reduce color constancy fatigue
-3. **Hue Spacing**: Sufficient perceptual distance between syntax colors to prevent confusion
-4. **Luminance Contrast**: Maximum distinction between code elements without harsh transitions
-5. **Blue Light Reduction**: Slightly warmed backgrounds in dark themes to reduce circadian disruption
+```bash
+cd marketplace/vscode
+npm install -g @vscode/vsce
+vsce package
+# produces equinox-theme-X.Y.Z.vsix — upload to marketplace.visualstudio.com
+```
 
-### Scientific References
-
-- Irlen, H. (1991). Reading by the Colors: Overcoming Dyslexia and Other Reading Disabilities Through the Irlen Method
-- Sheedy, J. E. (1992). Vision Problems in the U.S.: Data and Applications
-- WCAG 2.1 Guidelines: <https://www.w3.org/WAI/WCAG21/quickref/>
-
-## 🤝 Contributing
-
-Contributions are welcome! Please ensure all changes:
-
-1. Follow the existing code style (Prettier will format automatically)
-2. Use Conventional Commits for commit messages
-3. Include tests or documentation for new features
-4. Maintain or improve WCAG AAA accessibility compliance
-5. Verify all 4 variants display correctly on target platforms
-
-## 📝 License
-
-MIT License – See [LICENSE](LICENSE) file for details.
-
-## 🎓 Credits
-
-Equinox Theme was designed with input from visual ergonomics research, accessibility standards, and feedback from developers using IDEs 8+ hours daily.
-
-## 🔗 Resources
-
-- [VS Code Theme Documentation](https://code.visualstudio.com/api/extension-capability-proposals/color-theme)
-- [JetBrains Color Scheme Format](https://plugins.jetbrains.com/docs/intellij/themes.html)
-- [macOS Terminal Preferences](https://support.apple.com/guide/terminal/)
-- [WCAG 2.1 Accessibility Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
-- [Color Brewer 2.0](https://colorbrewer2.org/) – Accessible color palettes
-
----
-
-**Made with ❤️ for developers who care about their visual health.**
+**JetBrains quick reference:** copy `dist/jetbrains/` and `dist/jetbrains/themes/` into the plugin JAR structure described in `marketplace/jetbrains/README.md`, then ZIP and upload to plugins.jetbrains.com.

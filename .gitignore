@@ -1,17 +1,10 @@
 # Dependencies
 node_modules/
-package-lock.json
-yarn.lock
 
 # Build outputs
 dist/
-*.js
-*.js.map
-*.d.ts
-*.d.ts.map
 
 # IDE
-.vscode/
 .idea/
 *.swp
 *.swo
@@ -20,6 +13,8 @@ dist/
 
 # OS
 Thumbs.db
+
+# Environment
 .env
 .env.local
 

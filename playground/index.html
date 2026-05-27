@@ -2,75 +2,735 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Equinox Theme Playground | Live Preview</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
+    <title>Equinox Theme Playground | Live Preview</title>
+    <link rel="icon" type="image/svg+xml" href="icon.svg" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="container">
-      <!-- Header -->
-      <header class="header">
-        <div class="header-content">
-          <h1>🎨 Equinox Theme Playground</h1>
-          <p>Live preview of all 4 variants across 3 platforms</p>
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <img
+          class="brand-badge"
+          src="icon.svg"
+          alt="Equinox Theme icon"
+          aria-hidden="true"
+          width="28"
+          height="28"
+        />
+        <div class="brand-text">
+          <span class="brand-name">Equinox</span>
+          <span class="brand-sub">Theme Playground</span>
         </div>
-        <div class="header-controls">
-          <div class="control-group">
-            <label for="theme-select">Variant:</label>
-            <select id="theme-select">
-              <option value="dark-modern">Equinox Dark Modern</option>
-              <option value="dark-contrast">Equinox Dark Contrast</option>
-              <option value="light-soft">Equinox Light Soft</option>
-              <option value="light-contrast">Equinox Light Contrast</option>
-            </select>
-          </div>
-          <div class="control-group">
-            <label for="platform-select">Platform:</label>
-            <select id="platform-select">
-              <option value="vscode">VS Code</option>
-              <option value="jetbrains">JetBrains IDE</option>
-              <option value="terminal">macOS Terminal</option>
-            </select>
-          </div>
-        </div>
-      </header>
+      </div>
+    </header>
 
-      <!-- Main Content -->
-      <main class="main-content">
-        <!-- Preview Container -->
-        <section class="preview-section">
-          <div id="preview-container" class="preview-container"></div>
-        </section>
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Preview Container -->
+      <section class="preview-section">
+        <div id="preview-container" class="preview-container"></div>
+      </section>
+    </main>
 
-        <!-- Sidebar: Color Palette -->
-        <aside class="sidebar">
-          <div class="sidebar-content">
-            <h2>Color Palette</h2>
-            <div id="color-palette" class="color-palette"></div>
-
-            <h2 style="margin-top: 2rem">Syntax Highlighting</h2>
-            <div id="syntax-palette" class="syntax-palette"></div>
-
-            <h2 style="margin-top: 2rem">ANSI Colors</h2>
-            <div id="ansi-palette" class="ansi-palette"></div>
-          </div>
-        </aside>
-      </main>
-    </div>
-
-    <!-- Modal for larger color preview -->
-    <div id="color-modal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2 id="modal-title"></h2>
-        <div id="modal-body"></div>
+    <!-- ── Variant Menu ── -->
+    <div id="variant-menu" class="platform-menu" inert>
+      <div class="glass-effect"></div>
+      <div class="glass-tint"></div>
+      <div class="glass-shine"></div>
+      <div class="platform-menu-content">
+        <div class="platform-menu-label">Theme Variant</div>
+        <button class="platform-btn variant-option" data-variant="dark-modern">
+          <span class="platform-btn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name">Dark Modern</span>
+            <span class="platform-btn-desc">Unified dark · slate-blue</span>
+          </span>
+          <svg
+            class="variant-check"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </button>
+        <button
+          class="platform-btn variant-option"
+          data-variant="dark-contrast"
+        >
+          <span class="platform-btn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 2a10 10 0 0 1 0 20z" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name">Dark Contrast</span>
+            <span class="platform-btn-desc">Split dark · structural edges</span>
+          </span>
+          <svg
+            class="variant-check"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </button>
+        <button class="platform-btn variant-option" data-variant="light-soft">
+          <span class="platform-btn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+          </span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name">Light Soft</span>
+            <span class="platform-btn-desc">Unified light · cream-white</span>
+          </span>
+          <svg
+            class="variant-check"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </button>
+        <button
+          class="platform-btn variant-option"
+          data-variant="light-contrast"
+        >
+          <span class="platform-btn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M3 12h18M12 3v18" opacity=".4" />
+            </svg>
+          </span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name">Light Contrast</span>
+            <span class="platform-btn-desc"
+              >Split light · architectural clarity</span
+            >
+          </span>
+          <svg
+            class="variant-check"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </button>
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- ── Platform Menu ── -->
+    <div id="platform-menu" class="platform-menu" inert>
+      <div class="glass-effect"></div>
+      <div class="glass-tint"></div>
+      <div class="glass-shine"></div>
+      <div class="platform-menu-content">
+        <div class="platform-menu-label">Platform Preview</div>
+        <button class="platform-btn platform-option" data-platform="vscode">
+          <span class="platform-btn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="16 18 22 12 16 6" />
+              <polyline points="8 6 2 12 8 18" />
+            </svg>
+          </span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name">VS Code</span>
+            <span class="platform-btn-desc"
+              >JSON color theme · window borders</span
+            >
+          </span>
+          <svg
+            class="platform-check"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </button>
+        <button class="platform-btn platform-option" data-platform="jetbrains">
+          <span class="platform-btn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M7 8h10M7 12h6M7 16h8" />
+            </svg>
+          </span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name">JetBrains IDE</span>
+            <span class="platform-btn-desc"
+              >ICLS color scheme · accent color</span
+            >
+          </span>
+          <svg
+            class="platform-check"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </button>
+        <button
+          class="platform-btn platform-option"
+          data-platform="jetbrains-islands"
+        >
+          <span class="platform-btn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="2" y="4" width="9" height="16" rx="2" />
+              <rect x="13" y="4" width="9" height="10" rx="2" />
+              <rect x="13" y="16" width="9" height="4" rx="2" />
+            </svg>
+          </span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name">JetBrains Islands</span>
+            <span class="platform-btn-desc"
+              >New UI · floating island panels</span
+            >
+          </span>
+          <svg
+            class="platform-check"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </button>
+        <button class="platform-btn platform-option" data-platform="terminal">
+          <span class="platform-btn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="4 17 10 11 4 5" />
+              <line x1="12" y1="19" x2="20" y2="19" />
+            </svg>
+          </span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name">macOS Terminal</span>
+            <span class="platform-btn-desc"
+              >Plist profile · 16 ANSI colors</span
+            >
+          </span>
+          <svg
+            class="platform-check"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── Settings Menu ── -->
+    <div id="settings-menu" class="platform-menu" inert>
+      <div class="glass-effect"></div>
+      <div class="glass-tint"></div>
+      <div class="glass-shine"></div>
+      <div class="platform-menu-content">
+        <div class="platform-menu-label">Settings</div>
+        <div class="settings-row">
+          <span class="settings-row-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </span>
+          <span class="settings-row-text">
+            <span class="settings-row-name">Dark mode</span>
+            <span class="settings-row-desc">Toggle playground background</span>
+          </span>
+          <button
+            class="liquid-toggle"
+            id="toggle-dark"
+            role="switch"
+            aria-checked="false"
+          >
+            <div class="knockout">
+              <div class="indicator indicator--masked">
+                <div class="mask"></div>
+              </div>
+            </div>
+            <div class="indicator__liquid">
+              <div class="shadow"></div>
+              <div class="wrapper">
+                <div class="liquids">
+                  <div class="liquid__shadow"></div>
+                  <div class="liquid__track"></div>
+                </div>
+              </div>
+              <div class="cover"></div>
+            </div>
+          </button>
+        </div>
+        <div class="settings-sep"></div>
+        <div class="settings-row">
+          <span class="settings-row-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+            </svg>
+          </span>
+          <span class="settings-row-text">
+            <span class="settings-row-name">Frosted glass</span>
+            <span class="settings-row-desc"
+              >Milky blur on dock &amp; menus</span
+            >
+          </span>
+          <button
+            class="liquid-toggle"
+            id="toggle-glass"
+            role="switch"
+            aria-checked="false"
+          >
+            <div class="knockout">
+              <div class="indicator indicator--masked">
+                <div class="mask"></div>
+              </div>
+            </div>
+            <div class="indicator__liquid">
+              <div class="shadow"></div>
+              <div class="wrapper">
+                <div class="liquids">
+                  <div class="liquid__shadow"></div>
+                  <div class="liquid__track"></div>
+                </div>
+              </div>
+              <div class="cover"></div>
+            </div>
+          </button>
+        </div>
+        <div class="settings-sep"></div>
+        <button id="btn-help" class="platform-btn" type="button">
+          <span class="platform-btn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+          </span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name">Help &amp; Wiki</span>
+            <span class="platform-btn-desc"
+              >Playground guide &amp; reference</span
+            >
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── Help Modal ── -->
+    <div id="help-modal" class="help-modal" inert>
+      <div class="help-modal-backdrop" id="help-modal-backdrop"></div>
+      <div class="help-modal-panel">
+        <div class="glass-effect"></div>
+        <div class="glass-tint"></div>
+        <div class="glass-shine"></div>
+        <div class="help-modal-content">
+          <div class="help-modal-header">
+            <span class="help-modal-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+              Playground Help &amp; Wiki
+            </span>
+            <button
+              id="btn-close-help"
+              class="modal-close-btn"
+              aria-label="Close"
+              type="button"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+          <div id="help-body" class="help-body"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SVG: Physics-based Liquid Glass distortion filters ── -->
+    <svg
+      class="glass-filter-defs"
+      aria-hidden="true"
+      style="position: absolute; width: 0; height: 0; overflow: hidden"
+    >
+      <defs>
+        <!-- Dock pill filter — updated by ResizeObserver -->
+        <filter
+          id="glass-distortion-dock"
+          x="-2%"
+          y="-2%"
+          width="104%"
+          height="104%"
+          color-interpolation-filters="sRGB"
+        >
+          <feImage
+            id="glass-dock-map"
+            href=""
+            x="0"
+            y="0"
+            width="400"
+            height="60"
+            preserveAspectRatio="none"
+            result="displacement_map"
+          />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="displacement_map"
+            scale="0"
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </filter>
+        <!-- Panel filter — modals and menus (objectBoundingBox) -->
+        <filter
+          id="glass-distortion-panel"
+          x="0"
+          y="0"
+          width="1"
+          height="1"
+          primitiveUnits="objectBoundingBox"
+          color-interpolation-filters="sRGB"
+        >
+          <feImage
+            id="glass-panel-map"
+            href=""
+            x="0"
+            y="0"
+            width="1"
+            height="1"
+            preserveAspectRatio="none"
+            result="displacement_map"
+          />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="displacement_map"
+            scale="0"
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </filter>
+      </defs>
+    </svg>
+
+    <!-- ── SVG: Liquid toggle filters ── -->
+    <svg
+      aria-hidden="true"
+      style="position: absolute; width: 0; height: 0; overflow: hidden"
+    >
+      <defs>
+        <filter id="lt-goo" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="4" />
+          <feColorMatrix
+            in="blur"
+            result="matrix"
+            type="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
+          />
+          <feComposite in="matrix" operator="atop" />
+        </filter>
+        <filter id="lt-remove-black" color-interpolation-filters="sRGB">
+          <feColorMatrix
+            type="matrix"
+            values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              -255 -255 -255 0 1"
+            result="black-pixels"
+          />
+          <feMorphology
+            in="black-pixels"
+            operator="dilate"
+            radius="0.5"
+            result="smoothed"
+          />
+          <feComposite in="SourceGraphic" in2="smoothed" operator="out" />
+        </filter>
+      </defs>
+    </svg>
+
+    <!-- ── Mobile landscape overlay (portrait only) ── -->
+    <div class="landscape-hint" aria-live="polite" aria-atomic="true">
+      <div class="landscape-hint-card">
+        <div class="glass-effect"></div>
+        <div class="glass-tint"></div>
+        <div class="glass-shine"></div>
+        <div class="landscape-hint-inner">
+          <svg
+            class="landscape-hint-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="48"
+            height="48"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="7" width="20" height="14" rx="2" />
+            <path d="M7 7V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2" opacity=".4" />
+          </svg>
+          <p class="landscape-hint-title">Rotate your device</p>
+          <p class="landscape-hint-sub">
+            The playground is designed for landscape orientation
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Glass Dock ── -->
+    <nav class="glass-dock" aria-label="Playground controls">
+      <div class="glass-effect"></div>
+      <div class="glass-tint"></div>
+      <div class="glass-shine"></div>
+      <div class="glass-content">
+        <!-- Variant selector -->
+        <button
+          id="btn-variant"
+          class="dock-btn has-menu"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <svg
+            class="dock-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"
+            />
+          </svg>
+          <span class="dock-label">Variant</span>
+        </button>
+
+        <!-- Platform selector -->
+        <button
+          id="btn-platform"
+          class="dock-btn has-menu"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <svg
+            class="dock-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="2" y="3" width="20" height="14" rx="2" />
+            <line x1="8" y1="21" x2="16" y2="21" />
+            <line x1="12" y1="17" x2="12" y2="21" />
+          </svg>
+          <span class="dock-label">Platform</span>
+        </button>
+
+        <div class="dock-sep"></div>
+
+        <!-- Settings (dark mode + frosted glass toggles) -->
+        <button
+          id="btn-settings"
+          class="dock-btn has-menu"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <svg
+            class="dock-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+            />
+          </svg>
+          <span class="dock-label">Settings</span>
+        </button>
+      </div>
+    </nav>
+
+    <script type="module" src="./main.ts"></script>
   </body>
 </html>

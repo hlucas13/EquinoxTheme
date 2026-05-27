@@ -1,0 +1,75 @@
+name: Release
+
+on:
+    push:
+        tags:
+            - 'v*'
+
+permissions:
+    contents: write
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: npm
+
+            - run: npm ci
+
+            - name: Build theme files
+              run: npm run build
+
+            - name: Package VS Code themes
+              run: |
+                  cd dist/vscode
+                  zip -r ../../equinox-vscode-${{ github.ref_name }}.zip .
+
+            - name: Package JetBrains themes
+              run: |
+                  cd dist/jetbrains
+                  zip -r ../../equinox-jetbrains-${{ github.ref_name }}.zip .
+
+            - name: Package Terminal themes
+              run: |
+                  cd dist/terminal
+                  zip -r ../../equinox-terminal-${{ github.ref_name }}.zip .
+
+            - name: Package all themes
+              run: |
+                  zip -r equinox-all-${{ github.ref_name }}.zip dist/vscode dist/jetbrains dist/terminal dist/manifest.json
+
+            - name: Create GitHub Release
+              uses: softprops/action-gh-release@v2
+              with:
+                  name: Equinox Theme ${{ github.ref_name }}
+                  body: |
+                      ## Equinox Theme ${{ github.ref_name }}
+
+                      Multi-platform ergonomic theme for VS Code, JetBrains IDEs, and macOS Terminal.
+
+                      ### Downloads
+
+                      | Package | Contents |
+                      |---------|----------|
+                      | `equinox-all-*.zip` | All platforms bundled |
+                      | `equinox-vscode-*.zip` | VS Code `.json` theme files |
+                      | `equinox-jetbrains-*.zip` | JetBrains `.icls` color schemes |
+                      | `equinox-terminal-*.zip` | macOS Terminal `.terminal` profiles |
+
+                      ### Installation
+
+                      **VS Code:** Copy the `.json` files to your VS Code themes directory or install via the marketplace.
+
+                      **JetBrains:** Go to `Settings → Editor → Color Scheme → Import Scheme` and select the `.icls` file.
+
+                      **macOS Terminal:** Double-click the `.terminal` file to import the profile.
+                  files: |
+                      equinox-all-${{ github.ref_name }}.zip
+                      equinox-vscode-${{ github.ref_name }}.zip
+                      equinox-jetbrains-${{ github.ref_name }}.zip
+                      equinox-terminal-${{ github.ref_name }}.zip

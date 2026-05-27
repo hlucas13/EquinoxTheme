@@ -1,0 +1,76 @@
+{
+    "$schema": "https://json.schemastore.org/vscode-extension-manifest.json",
+    "name": "equinox-theme",
+    "displayName": "Equinox Theme",
+    "description": "Multi-platform ergonomic theme system for VS Code, JetBrains IDEs, and macOS Terminal. Four variants — Dark Modern, Dark Contrast, Light Soft, Light Contrast. Every colour combination meets WCAG AAA (7:1) contrast.",
+    "version": "1.0.0",
+    "publisher": "equinox-team",
+    "author": {
+        "name": "Equinox Team"
+    },
+    "contributors": [
+        {
+            "name": "Homero P.",
+            "url": "https://github.com/hlucas13"
+        },
+        {
+            "name": "Beatriz O.",
+            "url": "https://github.com/beatrizsaoliveira"
+        }
+    ],
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hlucas13/EquinoxTheme.git"
+    },
+    "bugs": {
+        "url": "https://github.com/hlucas13/EquinoxTheme/issues"
+    },
+    "homepage": "https://github.com/hlucas13/EquinoxTheme#readme",
+    "icon": "icon-128.png",
+    "galleryBanner": {
+        "color": "#1a1f2e",
+        "theme": "dark"
+    },
+    "engines": {
+        "vscode": "^1.75.0"
+    },
+    "categories": [
+        "Themes"
+    ],
+    "keywords": [
+        "theme",
+        "dark",
+        "light",
+        "ergonomic",
+        "wcag",
+        "contrast",
+        "syntax-highlighting",
+        "color-scheme",
+        "equinox"
+    ],
+    "contributes": {
+        "themes": [
+            {
+                "label": "Equinox Dark Modern",
+                "uiTheme": "vs-dark",
+                "path": "./themes/equinox-dark-modern.json"
+            },
+            {
+                "label": "Equinox Dark Contrast",
+                "uiTheme": "vs-dark",
+                "path": "./themes/equinox-dark-contrast.json"
+            },
+            {
+                "label": "Equinox Light Soft",
+                "uiTheme": "vs",
+                "path": "./themes/equinox-light-soft.json"
+            },
+            {
+                "label": "Equinox Light Contrast",
+                "uiTheme": "vs",
+                "path": "./themes/equinox-light-contrast.json"
+            }
+        ]
+    }
+}

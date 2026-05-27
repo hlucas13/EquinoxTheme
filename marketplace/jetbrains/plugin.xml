@@ -1,0 +1,122 @@
+<idea-plugin>
+    <!-- ── Plugin identity ─────────────────────────────────────────────────── -->
+    <id>io.equinox.theme</id>
+    <name>Equinox Theme</name>
+    <version>1.0.0</version>
+
+    <description><![CDATA[
+        <p>
+            <strong>Equinox Theme</strong> — a multi-platform ergonomic color theme
+            system with four carefully balanced variants. Every color pair meets
+            <strong>WCAG AAA (7:1)</strong> contrast, reducing cognitive fatigue
+            during long coding sessions.
+        </p>
+
+        <h3>Variants</h3>
+        <ul>
+            <li><strong>Dark Modern</strong> — Unified dark slate-blue background. Calm and consistent, ideal for extended sessions.</li>
+            <li><strong>Dark Contrast</strong> — Split dark backgrounds: a darker editor against a slightly lighter panel. Clear structural hierarchy.</li>
+            <li><strong>Light Soft</strong> — Unified cream-white background. Easy on the eyes in bright environments.</li>
+            <li><strong>Light Contrast</strong> — Split light backgrounds with maximum architectural depth.</li>
+        </ul>
+
+        <h3>New UI / Islands support</h3>
+        <p>
+            Each variant ships a <code>*-islands.icls</code> color scheme and a
+            <code>.theme.json</code> UI theme for full compatibility with the
+            <strong>New UI</strong> and the floating <em>Islands</em> panel layout
+            introduced in IntelliJ IDEA 2024.1+.
+        </p>
+
+        <h3>Installation</h3>
+        <ol>
+            <li>Install via <em>Settings → Plugins → Marketplace</em> and search for <strong>Equinox Theme</strong>.</li>
+            <li>Go to <em>Settings → Appearance → Theme</em> and select the desired Equinox variant.</li>
+            <li>For the color scheme only: <em>Settings → Editor → Color Scheme</em>.</li>
+        </ol>
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <ul>
+            <li><strong>1.0.0</strong> — Initial release: 4 variants × classic ICLS + Islands ICLS + UI theme.json</li>
+        </ul>
+    ]]></change-notes>
+
+    <!-- ── Vendor ─────────────────────────────────────────────────────────── -->
+    <vendor
+        email="hmr.prd@gmail.com"
+        url="https://github.com/hlucas13"
+    >
+        Equinox Team (Homero P. &amp; Beatriz O.)
+    </vendor>
+
+    <!-- ── Compatibility ───────────────────────────────────────────────────── -->
+    <!--
+        since-build = 233.0 (2023.3)  — minimum version for New UI stability
+        until-build is omitted → compatible with all future builds
+    -->
+    <idea-version since-build="233.0" />
+
+    <!-- ── Dependencies ───────────────────────────────────────────────────── -->
+    <!-- No plugin dependencies; this is a pure theme plugin -->
+
+    <!-- ── Extensions ─────────────────────────────────────────────────────── -->
+    <extensions defaultExtensionNs="com.intellij">
+
+        <!-- ── UI Themes (New UI / Islands) ─────────────────────────────── -->
+        <themeProvider
+            id="io.equinox.theme.dark-modern"
+            path="/themes/equinox-dark-modern.theme.json"
+        />
+        <themeProvider
+            id="io.equinox.theme.dark-contrast"
+            path="/themes/equinox-dark-contrast.theme.json"
+        />
+        <themeProvider
+            id="io.equinox.theme.light-soft"
+            path="/themes/equinox-light-soft.theme.json"
+        />
+        <themeProvider
+            id="io.equinox.theme.light-contrast"
+            path="/themes/equinox-light-contrast.theme.json"
+        />
+
+        <!-- ── Classic Color Schemes (.icls) ────────────────────────────── -->
+        <bundledColorScheme
+            id="io.equinox.scheme.dark-modern"
+            path="/colors/equinox-dark-modern.icls"
+        />
+        <bundledColorScheme
+            id="io.equinox.scheme.dark-contrast"
+            path="/colors/equinox-dark-contrast.icls"
+        />
+        <bundledColorScheme
+            id="io.equinox.scheme.light-soft"
+            path="/colors/equinox-light-soft.icls"
+        />
+        <bundledColorScheme
+            id="io.equinox.scheme.light-contrast"
+            path="/colors/equinox-light-contrast.icls"
+        />
+
+        <!-- ── Islands Color Schemes (.icls) ────────────────────────────── -->
+        <bundledColorScheme
+            id="io.equinox.scheme.dark-modern-islands"
+            path="/colors/equinox-dark-modern-islands.icls"
+        />
+        <bundledColorScheme
+            id="io.equinox.scheme.dark-contrast-islands"
+            path="/colors/equinox-dark-contrast-islands.icls"
+        />
+        <bundledColorScheme
+            id="io.equinox.scheme.light-soft-islands"
+            path="/colors/equinox-light-soft-islands.icls"
+        />
+        <bundledColorScheme
+            id="io.equinox.scheme.light-contrast-islands"
+            path="/colors/equinox-light-contrast-islands.icls"
+        />
+
+    </extensions>
+
+</idea-plugin>
