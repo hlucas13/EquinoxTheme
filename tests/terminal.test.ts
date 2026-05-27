@@ -11,6 +11,8 @@ import {
     lightAnsiPalette,
 } from '../src/themes/variants';
 
+const HEX_RE = /^#[0-9a-fA-F]{6}$/;
+
 describe('generateTerminalProfile', () => {
     it('preserves the variant name', () => {
         const profile = generateTerminalProfile(
@@ -130,6 +132,64 @@ describe('terminalProfileToXml', () => {
                 : lightAnsiPalette;
             const profile = generateTerminalProfile(variant, ansi);
             expect(() => terminalProfileToXml(profile)).not.toThrow();
+        }
+    });
+});
+
+// ── Python build payload ─────────────────────────────────────────────────────
+// The build serialises generateTerminalProfile() output to a JSON file that is
+// consumed by scripts/generate-terminal.py.  These tests verify that every
+// field expected by the Python script is present and valid.
+describe('terminal profile → Python JSON payload', () => {
+    it('backgroundColor is a 6-digit hex string', () => {
+        const p = generateTerminalProfile(equinoxDarkModern, darkAnsiPalette);
+        expect(p.backgroundColor).toMatch(HEX_RE);
+    });
+
+    it('foregroundColor is a 6-digit hex string', () => {
+        const p = generateTerminalProfile(equinoxDarkModern, darkAnsiPalette);
+        expect(p.foregroundColor).toMatch(HEX_RE);
+    });
+
+    it('cursorColor is a 6-digit hex string', () => {
+        const p = generateTerminalProfile(equinoxDarkModern, darkAnsiPalette);
+        expect(p.cursorColor).toMatch(HEX_RE);
+    });
+
+    it('ansiPalette has all 16 required ANSI color fields', () => {
+        const p = generateTerminalProfile(equinoxDarkModern, darkAnsiPalette);
+        const required = [
+            'black',
+            'red',
+            'green',
+            'yellow',
+            'blue',
+            'magenta',
+            'cyan',
+            'white',
+            'brightBlack',
+            'brightRed',
+            'brightGreen',
+            'brightYellow',
+            'brightBlue',
+            'brightMagenta',
+            'brightCyan',
+            'brightWhite',
+        ] as const;
+        for (const key of required) {
+            expect(p.ansiPalette[key]).toMatch(HEX_RE);
+        }
+    });
+
+    it('all 4 variants produce valid payloads without throwing', () => {
+        for (const variant of allVariants) {
+            const ansi = variant.name.includes('Dark')
+                ? darkAnsiPalette
+                : lightAnsiPalette;
+            const p = generateTerminalProfile(variant, ansi);
+            expect(p.backgroundColor).toMatch(HEX_RE);
+            expect(p.foregroundColor).toMatch(HEX_RE);
+            expect(p.cursorColor).toMatch(HEX_RE);
         }
     });
 });

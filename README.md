@@ -52,13 +52,21 @@ After installing: **Settings → Appearance → Theme** → select the desired E
 ## Quick Start
 
 ```bash
-git clone https://github.com/yourusername/equinox-colors.git
-cd equinox-colors
+git clone https://github.com/hlucas13/EquinoxTheme.git
+cd EquinoxTheme
 npm install
 npm run build
 ```
 
 **Requirements**: Node.js ≥ 18, npm ≥ 9.
+
+> **macOS Terminal profiles** also require Python 3 + PyObjC:
+>
+> ```bash
+> pip3 install pyobjc --break-system-packages
+> ```
+>
+> On Linux/Windows the terminal build step is skipped automatically; all other platforms build normally.
 
 Build output:
 
@@ -157,7 +165,7 @@ equinox-colors/
 │   ├── platforms/
 │   │   ├── vscode.ts           # VS Code JSON theme generator
 │   │   ├── jetbrains.ts        # JetBrains ICLS + Islands + .theme.json generators
-│   │   └── terminal.ts         # macOS Terminal plist generator
+│   │   └── terminal.ts         # macOS Terminal profile data generator
 │   └── build.ts                # Build orchestrator → dist/
 ├── playground/
 │   ├── index.html              # Liquid Glass UI shell
@@ -165,14 +173,16 @@ equinox-colors/
 │   ├── glass-distortion.ts     # Snell's-law displacement map generator
 │   └── styles.css              # Glass tokens, dock, liquid toggle, modal, Islands layout
 ├── scripts/
-│   └── generate-icons.js       # SVG → PNG at 11 marketplace sizes (uses sharp)
+│   ├── generate-icons.js       # SVG → PNG at 11 marketplace sizes (uses sharp)
+│   ├── generate-terminal.py    # Python plist generator (NSKeyedArchiver NSColor data)
+│   └── package-marketplace.js  # Assembles .vsix and .zip for VS Code / JetBrains
 ├── marketplace/
 │   ├── vscode/                 # VS Code extension metadata (package.json, .vscodeignore)
 │   └── jetbrains/              # JetBrains plugin metadata (plugin.xml)
 ├── images/
 │   ├── icon.svg                # Master icon source
 │   └── icons/                  # Pre-generated PNGs (16–1024 px)
-├── tests/                      # Vitest unit + integration tests
+├── tests/                      # Vitest unit tests
 ├── build.js                    # esbuild entry (compiles src/build.ts)
 ├── vite.config.ts              # Playground dev server
 ├── tsconfig.json
@@ -208,18 +218,21 @@ src/platforms/
   jetbrains.ts → dist/jetbrains/*.icls
                → dist/jetbrains/*-islands.icls
                → dist/jetbrains/themes/*.theme.json
-  terminal.ts  → dist/terminal/*.terminal
+  terminal.ts  → [profile data] → scripts/generate-terminal.py
+                                → dist/terminal/*.terminal
        ↓
 playground/main.ts         ← consumes variants directly (no dist/ needed)
 ```
 
 ### CI / CD
 
-| Workflow           | Trigger            | Action                                                  |
-| ------------------ | ------------------ | ------------------------------------------------------- |
-| `ci.yml`           | Push / PR → `main` | Typecheck, lint, build                                  |
-| `auto-release.yml` | Push → `main`      | Bumps patch version, builds, publishes GitHub Release   |
-| `release.yml`      | Tag `v*`           | Builds and publishes release for a specific version tag |
+| Workflow           | Trigger            | Action                                                                                 |
+| ------------------ | ------------------ | -------------------------------------------------------------------------------------- |
+| `ci.yml`           | Push / PR → `main` | Typecheck, lint, build                                                                 |
+| `auto-release.yml` | Push → `main`      | Bumps patch version, builds, publishes GitHub Release + VS Code Marketplace (VSCE_PAT) |
+| `release.yml`      | Tag `v*`           | Builds and publishes release for a specific version tag                                |
+
+> **VS Code auto-publish** requires a `VSCE_PAT` repository secret (Personal Access Token from [marketplace.visualstudio.com/manage](https://marketplace.visualstudio.com/manage)). Add it under **Settings → Secrets and variables → Actions**.
 
 ### Code Quality
 

@@ -693,13 +693,28 @@ function buildHelpContent(): string {
           <span class="help-section-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           </span>
-          <h3 class="help-section-title">Installing the Theme</h3>
+          <h3 class="help-section-title">Install from Marketplace</h3>
         </div>
         <div class="help-section-body">
           <ul class="help-list">
-            <li><strong>VS Code</strong> — Copy <em>dist/vscode/*.json</em> to your themes folder, then open <em>Preferences: Color Theme</em> and search "Equinox".</li>
+            <li><strong>VS Code</strong> — <a class="help-link" href="vscode:extension/equinox-team.equinox-colors" title="Open in VS Code">One-click install ↗</a> or search <em>Equinox Colors</em> in the Extensions panel. Also available at <a class="help-link" href="https://marketplace.visualstudio.com/items?itemName=equinox-team.equinox-colors" target="_blank" rel="noopener">VS Code Marketplace ↗</a>.</li>
+            <li><strong>JetBrains IDEs</strong> — Open <em>Settings → Plugins → Marketplace</em>, search <em>Equinox Colors</em> and install. Or visit <a class="help-link" href="https://plugins.jetbrains.com/plugin/31990-equinox-colors" target="_blank" rel="noopener">JetBrains Marketplace ↗</a>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="help-section">
+        <div class="help-section-hd">
+          <span class="help-section-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </span>
+          <h3 class="help-section-title">Manual Install</h3>
+        </div>
+        <div class="help-section-body">
+          <ul class="help-list">
+            <li><strong>VS Code</strong> — Copy <em>dist/vscode/*.json</em> to your themes folder, then open <em>Preferences: Color Theme</em> and search <em>Equinox</em>.</li>
             <li><strong>JetBrains (classic)</strong> — Copy <em>dist/jetbrains/*.icls</em> to your IDE's <em>colors/</em> folder, then go to <em>Settings → Editor → Color Scheme</em>.</li>
-            <li><strong>JetBrains Islands (New UI)</strong> — Copy <em>dist/jetbrains/*-islands.icls</em> to <em>colors/</em> and <em>dist/jetbrains/themes/*.theme.json</em> to your IDE's <em>themes/</em> folder. Enable <em>New UI</em> and select the Equinox theme in <em>Settings → Appearance → Theme</em>.</li>
+            <li><strong>JetBrains Islands (New UI)</strong> — Copy <em>dist/jetbrains/*-islands.icls</em> to <em>colors/</em> and <em>dist/jetbrains/themes/*.theme.json</em> to <em>themes/</em>. Enable <em>New UI</em> and select Equinox in <em>Settings → Appearance → Theme</em>.</li>
             <li><strong>macOS Terminal</strong> — Double-click any <em>.terminal</em> file in <em>dist/terminal/</em> and set it as default in <em>Terminal → Preferences → Profiles</em>.</li>
           </ul>
         </div>

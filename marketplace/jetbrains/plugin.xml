@@ -6,33 +6,61 @@
 
     <description><![CDATA[
         <p>
-            <strong>Equinox Colors</strong> — a multi-platform ergonomic color theme
-            system with four carefully balanced variants. Every color pair meets
-            <strong>WCAG AAA (7:1)</strong> contrast, reducing cognitive fatigue
-            during long coding sessions.
+            A carefully crafted color theme for developers who spend long hours in their IDE.
+            <strong>Equinox Colors</strong> is built around two principles: <em>ergonomic contrast</em>
+            and <em>visual calm</em> — every color pair meets <strong>WCAG AAA (7:1)</strong> contrast,
+            and the palette avoids harsh saturation that strains the eyes over time.
         </p>
 
-        <h3>Variants</h3>
+        <h3>Four variants, one cohesive system</h3>
         <ul>
-            <li><strong>Dark Modern</strong> — Unified dark slate-blue background. Calm and consistent, ideal for extended sessions.</li>
-            <li><strong>Dark Contrast</strong> — Split dark backgrounds: a darker editor against a slightly lighter panel. Clear structural hierarchy.</li>
-            <li><strong>Light Soft</strong> — Unified cream-white background. Easy on the eyes in bright environments.</li>
-            <li><strong>Light Contrast</strong> — Split light backgrounds with maximum architectural depth.</li>
+            <li>
+                <strong>Dark Modern</strong> — Unified dark background with an ergonomic slate-blue foundation.
+                Every panel shares the same tone, creating a focused, distraction-free environment.
+                Best for low-light or mixed-light environments.
+            </li>
+            <li>
+                <strong>Dark Contrast</strong> — A deeper editor sits inside a slightly lighter panel shell,
+                giving the code area its own architectural weight. Good for those who like visual structure
+                between editor and sidebar.
+            </li>
+            <li>
+                <strong>Light Soft</strong> — A warm cream-white background that replaces the harsh pure white
+                of most light themes. Easy on the eyes in bright offices, near windows, or on
+                high-brightness displays.
+            </li>
+            <li>
+                <strong>Light Contrast</strong> — Split light backgrounds with clear depth between editor and
+                UI panels. Maximum legibility for daytime use or paper-like aesthetics.
+            </li>
         </ul>
 
-        <h3>New UI / Islands support</h3>
+        <h3>Syntax palette</h3>
         <p>
-            Each variant ships a <code>*-islands.icls</code> color scheme and a
-            <code>.theme.json</code> UI theme for full compatibility with the
-            <strong>New UI</strong> and the floating <em>Islands</em> panel layout
-            introduced in IntelliJ IDEA 2024.1+.
+            The syntax colors share the same cool-warm balance across all variants:
+            soft <em>violet</em> keywords, <em>slate blue</em> functions, <em>sage green</em> strings,
+            <em>warm amber</em> variables, <em>dusty rose</em> numbers, and muted comments that stay
+            out of the way.
+        </p>
+
+        <h3>New UI &amp; Islands</h3>
+        <p>
+            Each variant ships a <code>*-islands.icls</code> color scheme and a <code>.theme.json</code>
+            UI theme for full compatibility with the <strong>New UI</strong> and the floating
+            <em>Islands</em> panel layout introduced in IntelliJ IDEA 2024.1+.
+        </p>
+
+        <h3>Multi-platform</h3>
+        <p>
+            The same palette is available for <strong>VS Code</strong> and <strong>macOS Terminal</strong>.
+            Find all versions at <a href="https://github.com/hlucas13/EquinoxTheme">github.com/hlucas13/EquinoxTheme</a>.
         </p>
 
         <h3>Installation</h3>
         <ol>
-            <li>Install via <em>Settings → Plugins → Marketplace</em> and search for <strong>Equinox Colors</strong>.</li>
-            <li>Go to <em>Settings → Appearance → Theme</em> and select the desired Equinox variant.</li>
-            <li>For the color scheme only: <em>Settings → Editor → Color Scheme</em>.</li>
+            <li>Go to <em>Settings → Plugins → Marketplace</em> and search for <strong>Equinox Colors</strong>, then click <em>Install</em>.</li>
+            <li>Go to <em>Settings → Appearance → Theme</em> and select the Equinox variant you want.</li>
+            <li>For the editor color scheme only: <em>Settings → Editor → Color Scheme</em>.</li>
         </ol>
     ]]></description>
 
