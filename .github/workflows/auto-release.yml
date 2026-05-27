@@ -1,0 +1,90 @@
+name: Auto Release
+
+on:
+    push:
+        branches: [main]
+
+permissions:
+    contents: write
+
+jobs:
+    release:
+        # Skip version-bump commits (avoid infinite loop)
+        if: "!startsWith(github.event.head_commit.message, 'chore: bump version')"
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+                  token: ${{ secrets.GITHUB_TOKEN }}
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: npm
+
+            - run: npm ci
+
+            - name: Configure git
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+
+            - name: Bump patch version
+              id: version
+              run: |
+                  npm version patch --no-git-tag-version
+                  VERSION=$(node -p "require('./package.json').version")
+                  echo "tag=v$VERSION" >> $GITHUB_OUTPUT
+
+            - name: Build themes
+              run: npm run build
+
+            - name: Package themes
+              run: |
+                  TAG=${{ steps.version.outputs.tag }}
+                  zip -r equinox-all-${TAG}.zip dist/vscode dist/jetbrains dist/terminal dist/manifest.json
+                  (cd dist/vscode    && zip -r ../../equinox-vscode-${TAG}.zip .)
+                  (cd dist/jetbrains && zip -r ../../equinox-jetbrains-${TAG}.zip .)
+                  (cd dist/terminal  && zip -r ../../equinox-terminal-${TAG}.zip .)
+
+            - name: Commit version bump, tag and push
+              run: |
+                  TAG=${{ steps.version.outputs.tag }}
+                  git add package.json package-lock.json
+                  git commit -m "chore: bump version to ${TAG} [skip ci]"
+                  git tag ${TAG}
+                  git push origin main --follow-tags
+
+            - name: Create GitHub Release
+              uses: softprops/action-gh-release@v2
+              with:
+                  tag_name: ${{ steps.version.outputs.tag }}
+                  name: Equinox Theme ${{ steps.version.outputs.tag }}
+                  body: |
+                      ## Equinox Theme ${{ steps.version.outputs.tag }}
+
+                      Multi-platform ergonomic theme for VS Code, JetBrains IDEs, and macOS Terminal.
+
+                      ### Downloads
+
+                      | Package | Contents |
+                      |---------|----------|
+                      | `equinox-all-*.zip` | All platforms bundled |
+                      | `equinox-vscode-*.zip` | VS Code `.json` theme files |
+                      | `equinox-jetbrains-*.zip` | JetBrains `.icls` color schemes |
+                      | `equinox-terminal-*.zip` | macOS Terminal `.terminal` profiles |
+
+                      ### Installation
+
+                      **VS Code:** Copy the `.json` files to your VS Code themes directory or install via the marketplace.
+
+                      **JetBrains:** Go to `Settings → Editor → Color Scheme → Import Scheme` and select the `.icls` file.
+
+                      **macOS Terminal:** Double-click the `.terminal` file to import the profile.
+                  files: |
+                      equinox-all-${{ steps.version.outputs.tag }}.zip
+                      equinox-vscode-${{ steps.version.outputs.tag }}.zip
+                      equinox-jetbrains-${{ steps.version.outputs.tag }}.zip
+                      equinox-terminal-${{ steps.version.outputs.tag }}.zip
