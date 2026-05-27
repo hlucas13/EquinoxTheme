@@ -186,6 +186,14 @@ src/platforms/
 playground/main.ts         ← consumes variants directly (no dist/ needed)
 ```
 
+### CI / CD
+
+| Workflow           | Trigger            | Action                                                  |
+| ------------------ | ------------------ | ------------------------------------------------------- |
+| `ci.yml`           | Push / PR → `main` | Typecheck, lint, build                                  |
+| `auto-release.yml` | Push → `main`      | Bumps patch version, builds, publishes GitHub Release   |
+| `release.yml`      | Tag `v*`           | Builds and publishes release for a specific version tag |
+
 ### Code Quality
 
 Pre-commit hooks run automatically on `git commit`:
