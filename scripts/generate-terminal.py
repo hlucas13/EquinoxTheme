@@ -73,6 +73,9 @@ def generate_terminal_plist(profile: dict) -> bytes:
     ansi = profile['ansi']
 
     plist_dict = {
+        # Required profile metadata — Terminal.app validates these
+        'type': 'Window Settings',
+        'ProfileCurrentVersion': 2.09,
         'name': profile['name'],
 
         # ANSI colors
