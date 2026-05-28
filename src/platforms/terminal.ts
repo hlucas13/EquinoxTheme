@@ -129,30 +129,28 @@ export function terminalProfileToXml(profile: TerminalProfile): string {
     plist += `  <key>BackgroundColor</key>\n`;
     plist += createColorDict({ red: bgR, green: bgG, blue: bgB });
 
-    // Background transparency: 95% transparent (5% opaque)
+    // 95% opacity: in the NSKeyedArchiver format (Python generator) this alpha is
+    // baked into the NSColor binary while BackgroundAlphaComponent stays 1.0.
+    // In this simple-dict fallback there is no NSColor binary, so we use
+    // BackgroundAlphaComponent directly to carry the 95% opacity value.
     plist += `  <key>BackgroundAlphaComponent</key>\n`;
-    plist += `  <real>0.05</real>\n`;
+    plist += `  <real>0.95</real>\n`;
 
-    // Background blur: 50%
+    // 50% blur
     plist += `  <key>BackgroundBlur</key>\n`;
     plist += `  <real>0.5</real>\n`;
 
-    plist += `  <key>UseStandardColors</key>\n`;
-    plist += `  <true/>\n`;
-
     plist += `  <key>FontWidthSpacing</key>\n`;
-    plist += `  <real>0.9</real>\n`;
+    plist += `  <real>1.004</real>\n`;
 
     plist += `  <key>FontHeightSpacing</key>\n`;
     plist += `  <real>1.0</real>\n`;
 
-    plist += `  <key>Font</key>\n`;
-    plist += `  <data>\n`;
-    plist += `    YnBsaXN0MDBOX0tOU0ZvbnQBAACACAoVFhcYGRobHCGEhYaHiIqLjY6PkJGSlJWWl5iZ\n`;
-    plist += `    mpudoKGip6ipqqqrrK2urq+wsLGxsrKzs7Oztba1tbW2tra2trm5ubm6urq6u7u7u7y8\n`;
-    plist += `    vLy8vby9vb2/v7+/wMDAwcDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAw\n`;
-    plist += `    MDAAAA\n`;
-    plist += `  </data>\n`;
+    plist += `  <key>CursorType</key>\n`;
+    plist += `  <integer>2</integer>\n`;
+
+    plist += `  <key>CursorBlink</key>\n`;
+    plist += `  <true/>\n`;
 
     plist += '</dict>\n';
     plist += '</plist>\n';

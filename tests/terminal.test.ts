@@ -109,19 +109,19 @@ describe('terminalProfileToXml', () => {
         expect(xml).toContain('CursorColor');
     });
 
-    it('RGB values are in 0-1 range (not raw 0-255 integers)', () => {
+    it('color RGB values are normalized (not raw 0-255 integers)', () => {
         const profile = generateTerminalProfile(
             equinoxLightSoft,
             lightAnsiPalette
         );
         const xml = terminalProfileToXml(profile);
-        // No value >= 2 should appear after a <real> tag (all normalized to 0-1)
+        // No value should be >= 2 (raw 255 would fail; FontWidthSpacing=1.004 is fine)
         const realValues = [...xml.matchAll(/<real>([\d.]+)<\/real>/g)].map(
             (m) => Number.parseFloat(m[1])
         );
         for (const v of realValues) {
             expect(v).toBeGreaterThanOrEqual(0);
-            expect(v).toBeLessThanOrEqual(1);
+            expect(v).toBeLessThan(2);
         }
     });
 

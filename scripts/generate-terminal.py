@@ -45,7 +45,7 @@ import os
 import plistlib
 
 try:
-    from AppKit import NSColor
+    from AppKit import NSColor, NSFont
     from Foundation import NSKeyedArchiver
     PYOBJC_AVAILABLE = True
 except ImportError:
@@ -61,11 +61,22 @@ def hex_to_components(hex_str: str) -> tuple[float, float, float]:
     )
 
 
-def archive_color(hex_str: str) -> bytes:
+def archive_color(hex_str: str, alpha: float = 1.0) -> bytes:
     """Serialize a hex color as NSKeyedArchiver binary data (what Terminal.app expects)."""
     r, g, b = hex_to_components(hex_str)
-    color = NSColor.colorWithSRGBRed_green_blue_alpha_(r, g, b, 1.0)
+    color = NSColor.colorWithSRGBRed_green_blue_alpha_(r, g, b, alpha)
     data = NSKeyedArchiver.archivedDataWithRootObject_(color)
+    return bytes(data)
+
+
+def archive_font(name: str, size: float):
+    """Serialize an NSFont as NSKeyedArchiver binary data."""
+    font = NSFont.fontWithName_size_(name, size)
+    if font is None:
+        font = NSFont.userFixedPitchFontOfSize_(size)
+    if font is None:
+        return None
+    data = NSKeyedArchiver.archivedDataWithRootObject_(font)
     return bytes(data)
 
 
@@ -98,32 +109,35 @@ def generate_terminal_plist(profile: dict) -> bytes:
         'ANSIBrightCyanColor':    archive_color(ansi['brightCyan']),
         'ANSIBrightWhiteColor':   archive_color(ansi['brightWhite']),
 
-        # UI colors
+        # UI colors — background uses alpha=0.95 (matching Terminal.app export)
         'TextColor':              archive_color(profile['foreground']),
-        'BackgroundColor':        archive_color(profile['background']),
+        'BackgroundColor':        archive_color(profile['background'], alpha=0.95),
         'CursorColor':            archive_color(profile['cursor']),
         'SelectionColor':         archive_color(ansi['brightBlack']),
 
-        # Background: fully opaque, no blur
+        # Background: fully opaque window, subtle blur
         'BackgroundAlphaComponent': 1.0,
-        'BackgroundBlur':           0.0,
+        'BackgroundBlur':           0.5,
 
-        # Font settings (San Francisco Mono 13pt — system default)
+        # Font: Fira Code NF Medium Retina 13pt
         'FontAntialias':    True,
-        'FontWidthSpacing': 1.0,
+        'FontWidthSpacing': 1.004,
         'FontHeightSpacing': 1.0,
 
-        # Cursor style: block
-        'CursorType': 0,
-        'CursorBlink': False,
+        # Cursor style: block, blinking
+        'CursorType': 2,
+        'CursorBlink': True,
 
         # Other preferences
-        'UseStandardColors': True,
-        'UseBoldFonts':      True,
-        'UseBrightBold':     False,
-        'columnCount':       220,
-        'rowCount':          50,
+        'UseBoldFonts':  True,
+        'UseBrightBold': False,
+        'columnCount':   80,
+        'rowCount':      24,
     }
+
+    font_data = archive_font('FiraCodeNFM-Ret', 13)
+    if font_data is not None:
+        plist_dict['Font'] = font_data
 
     return plistlib.dumps(plist_dict, fmt=plistlib.FMT_XML)
 
@@ -147,7 +161,7 @@ def main():
 
     for profile in profiles:
         plist_bytes = generate_terminal_plist(profile)
-        out_path = os.path.join(output_dir, f"{profile['filename']}.terminal")
+        out_path = os.path.join(output_dir, f"{profile['name']}.terminal")
         with open(out_path, 'wb') as f:
             f.write(plist_bytes)
         print(f"  ✓ {profile['name']}")
