@@ -29,10 +29,9 @@ Or install directly from the browser via the **Get** button on the [plugin page]
 
 After installing:
 
-1. **Settings → Appearance → Theme** → select the desired Equinox variant (changes the IDE UI).
-2. **Settings → Editor → Color Scheme** → select the **matching Equinox scheme** (same name as the theme chosen above).
+1. **Settings → Appearance → Theme** → select the desired Equinox variant — the matching editor color scheme applies automatically.
 
-> The editor color scheme does **not** change automatically when switching UI themes — step 2 is always required.
+> To override the editor scheme independently, go to **Settings → Editor → Color Scheme** after selecting the theme.
 
 ## Features
 
@@ -132,10 +131,9 @@ Open VS Code → `Preferences: Color Theme` → search "Equinox".
 
 After installing:
 
-1. **Settings → Appearance → Theme** → select the desired Equinox variant (changes the IDE UI).
-2. **Settings → Editor → Color Scheme** → select the **matching Equinox scheme** (same name as the theme chosen above).
+1. **Settings → Appearance → Theme** → select the desired Equinox variant — the matching editor color scheme applies automatically.
 
-> The editor color scheme does **not** change automatically when switching UI themes — step 2 is always required.
+> To override the editor scheme independently, go to **Settings → Editor → Color Scheme** after selecting the theme.
 
 **Manual install — Classic UI** (color scheme only):
 
@@ -157,7 +155,7 @@ cp dist/jetbrains/*-islands.xml ~/Library/Application\ Support/JetBrains/*/color
 cp dist/jetbrains/themes/*.theme.json ~/Library/Application\ Support/JetBrains/*/themes/
 ```
 
-In **Settings → Appearance → Theme** select an **Equinox … Islands** variant, then in **Settings → Editor → Color Scheme** select the matching **Equinox … Islands** scheme. The `Island.arc.compact` / `Island.borderWidth.compact` keys inside each Islands theme activate automatically when the IDE's **Compact Mode** is enabled.
+In **Settings → Appearance → Theme** select an **Equinox … Islands** variant — the matching editor color scheme applies automatically. The `Island.arc.compact` / `Island.borderWidth.compact` keys inside each Islands theme activate automatically when the IDE's **Compact Mode** toggle is enabled in **Settings → Appearance → Compact Mode** (no separate theme entry needed).
 
 ### macOS Terminal
 

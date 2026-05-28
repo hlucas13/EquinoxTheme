@@ -7,10 +7,9 @@ Or use the **Get** button on the [plugin page](https://plugins.jetbrains.com/plu
 
 After installing:
 
-1. **Settings → Appearance → Theme** → select the desired Equinox variant (changes the IDE UI).
-2. **Settings → Editor → Color Scheme** → select the **matching Equinox scheme** (same name as the theme chosen above).
+1. **Settings → Appearance → Theme** → select the desired Equinox variant — the matching editor color scheme applies automatically.
 
-> The editor color scheme does **not** change automatically when switching UI themes — step 2 is always required.
+> To override the editor scheme independently, go to **Settings → Editor → Color Scheme** after selecting the theme.
 
 ---
 
@@ -31,7 +30,7 @@ The JAR itself contains:
 ```
 META-INF/
   plugin.xml
-  pluginIcon.png
+  pluginIcon.svg
 colors/
   equinox-dark-modern.xml
   equinox-dark-modern-islands.xml
@@ -79,23 +78,21 @@ cp dist/jetbrains/themes/*.theme.json "$PLUGIN_DIR/themes/"
 
 # 4. Zip
 cd marketplace/jetbrains
-zip -r equinox-colors-1.0.3.zip equinox-colors/
+zip -r equinox-colors-1.0.4.zip equinox-colors/
 ```
 
 ## Plugin icon
 
-The JetBrains Marketplace requires a **40 × 40 px** icon placed at:
+The JetBrains Marketplace requires a **40 × 40 px SVG** icon placed inside the JAR at:
 
 ```
-META-INF/pluginIcon.svg        (or pluginIcon.png, 40×40)
+META-INF/pluginIcon.svg        (light/default)
 META-INF/pluginIcon_dark.svg   (optional dark variant)
 ```
 
-Copy from `images/icons/icon-40.png`:
+> JetBrains only recognises **SVG** format — PNG icons are silently ignored by the IDE and Marketplace.
 
-```bash
-cp images/icons/icon-40.png "$PLUGIN_DIR/META-INF/pluginIcon.png"
-```
+The `npm run package:jetbrains` script copies `images/icon.svg` automatically as both `pluginIcon.svg` and `pluginIcon_dark.svg`.
 
 ## Publishing
 

@@ -188,14 +188,16 @@ async function packageJetBrains() {
         path.join(metaDir, 'plugin.xml')
     );
 
-    // Plugin icon (40×40) — required by JetBrains Marketplace
-    const icon40 = path.join(ROOT, 'images', 'icons', 'icon-40.png');
-    if (fs.existsSync(icon40)) {
-        fs.copyFileSync(icon40, path.join(metaDir, 'pluginIcon.png'));
-        console.log('  ✓ META-INF/pluginIcon.png  (40×40)');
+    // Plugin icon — JetBrains requires SVG format (pluginIcon.svg / pluginIcon_dark.svg)
+    // The icon must be placed in META-INF/ of the inner JAR.
+    const iconSvg = path.join(ROOT, 'images', 'icon.svg');
+    if (fs.existsSync(iconSvg)) {
+        fs.copyFileSync(iconSvg, path.join(metaDir, 'pluginIcon.svg'));
+        fs.copyFileSync(iconSvg, path.join(metaDir, 'pluginIcon_dark.svg'));
+        console.log('  ✓ META-INF/pluginIcon.svg  (SVG, light + dark)');
     } else {
         console.warn(
-            '  ⚠  images/icons/icon-40.png not found — run "npm run icons" first.'
+            '  ⚠  images/icon.svg not found — plugin will show no icon.'
         );
     }
 

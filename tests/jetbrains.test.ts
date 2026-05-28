@@ -168,9 +168,9 @@ describe('generateJetBrainsTheme', () => {
         expect(theme.ui['Desktop.background']).toMatch(/^#[0-9a-fA-F]{6,8}$/);
     });
 
-    it('editorScheme is a classpath resource path (/colors/{slug}.xml)', () => {
+    it('editorScheme is the variant name (scheme name)', () => {
         const theme = generateJetBrainsTheme(equinoxDarkModern);
-        expect(theme.editorScheme).toMatch(/^\/colors\/.+\.xml$/);
+        expect(theme.editorScheme).toBe(equinoxDarkModern.name);
     });
 
     it('icons.ColorPalette has Actions.Red entry', () => {

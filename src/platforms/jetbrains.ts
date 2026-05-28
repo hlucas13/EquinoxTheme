@@ -673,6 +673,8 @@ export function generateJetBrainsTheme(
     const isDark = variant.name.includes('Dark');
     const ansi = isDark ? PALETTE.ansi.dark : PALETTE.ansi.light;
     const status = isDark ? PALETTE.status.dark : PALETTE.status.light;
+    const white = PALETTE.common.white;
+    const invisibleBorder = PALETTE.common.invisibleBorder;
 
     const p = variant.palette;
     const editorBg = p.editor.background;
@@ -684,17 +686,13 @@ export function generateJetBrainsTheme(
     const lineNumber = p.ui.lineNumber;
     const desktopHex = `#${islandsDesktopColor(variant)}`;
 
-    // Slug for the editorScheme reference (matches the .xml filename)
-    const slug = variant.name
-        .toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(/[()]/g, '');
-
     return {
         name: variant.name,
         dark: isDark,
         author: 'Equinox Team',
-        editorScheme: `/colors/${slug}.xml`,
+        // Use scheme name (not file path) so IntelliJ resolves via the bundled-scheme
+        // registry, which guarantees the editor scheme auto-applies on theme switch.
+        editorScheme: variant.name,
         ui: {
             // ── Desktop (Islands wallpaper) ──────────────────────────────────
             'Desktop.background': desktopHex,
@@ -734,7 +732,7 @@ export function generateJetBrainsTheme(
             'Button.foreground': fg,
             'Button.focusedBorderColor': accent,
             'Button.default.background': accent,
-            'Button.default.foreground': isDark ? '#ffffff' : '#ffffff',
+            'Button.default.foreground': white,
             'Button.default.focusColor': accent,
             'Button.default.startBorderColor': accent,
             'Button.default.endBorderColor': accent,
@@ -796,6 +794,14 @@ export function generateJetBrainsTheme(
             'ToolBar.borderColor': border,
             'RunWidget.background': panelBg,
 
+            // ── Action buttons (toolbar icons) ────────────────────────────────
+            'ActionButton.background': 'transparent',
+            'ActionButton.hoverBackground': selection,
+            'ActionButton.pressedBackground': selection,
+
+            // ── Separators ────────────────────────────────────────────────────
+            'Separator.separatorColor': border,
+
             // ── Status bar ───────────────────────────────────────────────────
             'StatusBar.background': panelBg,
             'StatusBar.hoverBackground': selection,
@@ -823,7 +829,7 @@ export function generateJetBrainsTheme(
 
             // ── Badge / Counter ───────────────────────────────────────────────
             'Counter.background': accent,
-            'Counter.foreground': isDark ? '#ffffff' : '#ffffff',
+            'Counter.foreground': white,
 
             // ── Git / VCS ─────────────────────────────────────────────────────
             'VersionControl.FileHistory.Commit.selectedBackground': selection,
@@ -867,6 +873,8 @@ export function generateJetBrainsIslandsTheme(
     const isDark = variant.name.includes('Dark');
     const ansi = isDark ? PALETTE.ansi.dark : PALETTE.ansi.light;
     const status = isDark ? PALETTE.status.dark : PALETTE.status.light;
+    const white = PALETTE.common.white;
+    const invisibleBorder = PALETTE.common.invisibleBorder;
 
     const p = variant.palette;
     const editorBg = p.editor.background;
@@ -901,9 +909,13 @@ export function generateJetBrainsIslandsTheme(
             'MainWindow.background': desktopHex,
 
             // ── Hide sidebar borders (Islands design spec) ────────────────────
-            'StatusBar.borderColor': '#00000000',
-            'ToolWindow.Stripe.borderColor': '#00000000',
-            'MainToolbar.borderColor': '#00000000',
+            'StatusBar.borderColor': invisibleBorder,
+            'ToolWindow.Stripe.borderColor': invisibleBorder,
+            'MainToolbar.borderColor': invisibleBorder,
+
+            // ── ToolWindow Stripe (side toggle-button strip) ───────────────
+            'ToolWindow.Stripe.background': panelBg,
+            'ToolWindow.Stripe.hoverBackground': selection,
 
             // ── Base panels ───────────────────────────────────────────────────
             'Panel.background': panelBg,
@@ -944,7 +956,7 @@ export function generateJetBrainsIslandsTheme(
             'Button.foreground': fg,
             'Button.focusedBorderColor': accent,
             'Button.default.background': accent,
-            'Button.default.foreground': '#ffffff',
+            'Button.default.foreground': white,
             'Button.default.focusColor': accent,
             'Button.default.startBorderColor': accent,
             'Button.default.endBorderColor': accent,
@@ -1006,6 +1018,14 @@ export function generateJetBrainsIslandsTheme(
             'ToolBar.borderColor': border,
             'RunWidget.background': panelBg,
 
+            // ── Action buttons (toolbar icons) ──────────────────────────────
+            'ActionButton.background': 'transparent',
+            'ActionButton.hoverBackground': selection,
+            'ActionButton.pressedBackground': selection,
+
+            // ── Separators ───────────────────────────────────────────
+            'Separator.separatorColor': border,
+
             // ── Status bar ────────────────────────────────────────────────────
             'StatusBar.background': panelBg,
             'StatusBar.hoverBackground': selection,
@@ -1032,7 +1052,7 @@ export function generateJetBrainsIslandsTheme(
 
             // ── Badge / Counter ───────────────────────────────────────────────
             'Counter.background': accent,
-            'Counter.foreground': '#ffffff',
+            'Counter.foreground': white,
 
             // ── Git / VCS ─────────────────────────────────────────────────────
             'VersionControl.FileHistory.Commit.selectedBackground': selection,

@@ -2,7 +2,7 @@
     <!-- ── Plugin identity ─────────────────────────────────────────────────── -->
     <id>io.equinox.color.theme</id>
     <name>Equinox Colors</name>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 
     <description><![CDATA[
         <p>
@@ -61,10 +61,7 @@
             <li>Go to <em>Settings → Plugins → Marketplace</em>, search for <strong>Equinox Colors</strong> and click <em>Install</em>. Restart if prompted.</li>
             <li>Go to <em>Settings → Appearance → Theme</em> and select the Equinox variant you want (e.g. <em>Equinox Dark Modern</em>). This changes the IDE UI.</li>
             <li>
-                Go to <em>Settings → Editor → Color Scheme</em> and select the <strong>matching Equinox scheme</strong> (same name as the theme you chose in step 2).
-                <br/>
-                <em>Note: the editor color scheme does not change automatically when switching UI themes — this step is always required.</em>
-            </li>
+            <li>The editor color scheme switches <strong>automatically</strong> when you select an Equinox UI theme. If it doesn't apply, go to <em>Settings → Editor → Color Scheme</em> and manually select the matching Equinox scheme.</li>
         </ol>
 
         <p>
@@ -75,6 +72,7 @@
 
     <change-notes><![CDATA[
         <ul>
+            <li><strong>1.0.4</strong> — Fixed light color schemes not appearing in <em>Settings → Editor → Color Scheme</em>; editor scheme now auto-applies when selecting an Equinox UI theme; fixed UI color inconsistencies in toolbars, sidebars, and action buttons.</li>
             <li><strong>1.0.3</strong> — Changed color scheme files from <code>.icls</code> to <code>.xml</code> extension to fix a <em>NullPointerException</em> on startup caused by IntelliJ's internal path normalisation appending <code>.xml</code> to non-<code>.xml</code> paths.</li>
             <li><strong>1.0.2</strong> — Added 4 dedicated Islands UI themes (New UI, 2025.3+); fixed color schemes not appearing in <em>Settings → Editor → Color Scheme</em> due to incorrect resource path format.</li>
             <li><strong>1.0.1</strong> — Clarified installation: editor color scheme must be set manually in <em>Settings → Editor → Color Scheme</em> after selecting the UI theme.</li>
@@ -141,38 +139,40 @@
         />
 
         <!-- ── Classic Color Schemes (.xml) ─────────────────────────────── -->
+        <!-- id must match the scheme name attribute in the .xml file so that     -->
+        <!-- IntelliJ registers it in the bundled-scheme registry on startup.     -->
         <bundledColorScheme
-            id="io.equinox.scheme.dark-modern"
+            id="Equinox Dark Modern"
             path="/colors/equinox-dark-modern.xml"
         />
         <bundledColorScheme
-            id="io.equinox.scheme.dark-contrast"
+            id="Equinox Dark Contrast"
             path="/colors/equinox-dark-contrast.xml"
         />
         <bundledColorScheme
-            id="io.equinox.scheme.light-soft"
+            id="Equinox Light Soft"
             path="/colors/equinox-light-soft.xml"
         />
         <bundledColorScheme
-            id="io.equinox.scheme.light-contrast"
+            id="Equinox Light Contrast"
             path="/colors/equinox-light-contrast.xml"
         />
 
         <!-- ── Islands Color Schemes (.xml) ─────────────────────────────── -->
         <bundledColorScheme
-            id="io.equinox.scheme.dark-modern-islands"
+            id="Equinox Dark Modern Islands"
             path="/colors/equinox-dark-modern-islands.xml"
         />
         <bundledColorScheme
-            id="io.equinox.scheme.dark-contrast-islands"
+            id="Equinox Dark Contrast Islands"
             path="/colors/equinox-dark-contrast-islands.xml"
         />
         <bundledColorScheme
-            id="io.equinox.scheme.light-soft-islands"
+            id="Equinox Light Soft Islands"
             path="/colors/equinox-light-soft-islands.xml"
         />
         <bundledColorScheme
-            id="io.equinox.scheme.light-contrast-islands"
+            id="Equinox Light Contrast Islands"
             path="/colors/equinox-light-contrast-islands.xml"
         />
 

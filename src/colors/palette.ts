@@ -160,6 +160,20 @@ const SHADOWS = {
 } as const;
 
 // ============================================================================
+// COMMON PLATFORM-NEUTRAL CONSTANTS
+// Values that appear in multiple platform generators but are not specific to
+// any single variant — pure white for on-accent text, and a fully-transparent
+// hex value used by JetBrains for invisible borders in the Islands layout.
+// ============================================================================
+
+const COMMON = {
+    /** Pure white — used for foreground text on accent-colored surfaces (buttons, counters). */
+    white: '#ffffff',
+    /** Fully-transparent hex — used by JetBrains to hide sidebar/toolbar borders. */
+    invisibleBorder: '#00000000',
+} as const;
+
+// ============================================================================
 // EXPORTED PALETTE
 // ============================================================================
 
@@ -181,4 +195,5 @@ export const PALETTE = {
         light: ANSI_LIGHT,
     },
     shadows: SHADOWS,
+    common: COMMON,
 } as const;
