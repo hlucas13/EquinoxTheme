@@ -2,7 +2,7 @@
     <!-- ── Plugin identity ─────────────────────────────────────────────────── -->
     <id>io.equinox.color.theme</id>
     <name>Equinox Colors</name>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 
     <description><![CDATA[
         <p>
@@ -45,7 +45,7 @@
 
         <h3>New UI &amp; Islands</h3>
         <p>
-            Each variant ships a <code>*-islands.icls</code> color scheme and a <code>.theme.json</code>
+            Each variant ships a <code>*-islands.xml</code> color scheme and a <code>.theme.json</code>
             UI theme for full compatibility with the <strong>New UI</strong> and the floating
             <em>Islands</em> panel layout introduced in IntelliJ IDEA 2024.1+.
         </p>
@@ -75,6 +75,7 @@
 
     <change-notes><![CDATA[
         <ul>
+            <li><strong>1.0.3</strong> — Changed color scheme files from <code>.icls</code> to <code>.xml</code> extension to fix a <em>NullPointerException</em> on startup caused by IntelliJ's internal path normalisation appending <code>.xml</code> to non-<code>.xml</code> paths.</li>
             <li><strong>1.0.2</strong> — Added 4 dedicated Islands UI themes (New UI, 2025.3+); fixed color schemes not appearing in <em>Settings → Editor → Color Scheme</em> due to incorrect resource path format.</li>
             <li><strong>1.0.1</strong> — Clarified installation: editor color scheme must be set manually in <em>Settings → Editor → Color Scheme</em> after selecting the UI theme.</li>
             <li><strong>1.0.0</strong> — Initial release: 4 variants × classic ICLS + Islands ICLS + UI theme.json</li>
@@ -139,40 +140,40 @@
             path="/themes/equinox-light-contrast-islands.theme.json"
         />
 
-        <!-- ── Classic Color Schemes (.icls) ────────────────────────────── -->
+        <!-- ── Classic Color Schemes (.xml) ─────────────────────────────── -->
         <bundledColorScheme
             id="io.equinox.scheme.dark-modern"
-            path="colors/equinox-dark-modern.icls"
+            path="/colors/equinox-dark-modern.xml"
         />
         <bundledColorScheme
             id="io.equinox.scheme.dark-contrast"
-            path="colors/equinox-dark-contrast.icls"
+            path="/colors/equinox-dark-contrast.xml"
         />
         <bundledColorScheme
             id="io.equinox.scheme.light-soft"
-            path="colors/equinox-light-soft.icls"
+            path="/colors/equinox-light-soft.xml"
         />
         <bundledColorScheme
             id="io.equinox.scheme.light-contrast"
-            path="colors/equinox-light-contrast.icls"
+            path="/colors/equinox-light-contrast.xml"
         />
 
-        <!-- ── Islands Color Schemes (.icls) ────────────────────────────── -->
+        <!-- ── Islands Color Schemes (.xml) ─────────────────────────────── -->
         <bundledColorScheme
             id="io.equinox.scheme.dark-modern-islands"
-            path="colors/equinox-dark-modern-islands.icls"
+            path="/colors/equinox-dark-modern-islands.xml"
         />
         <bundledColorScheme
             id="io.equinox.scheme.dark-contrast-islands"
-            path="colors/equinox-dark-contrast-islands.icls"
+            path="/colors/equinox-dark-contrast-islands.xml"
         />
         <bundledColorScheme
             id="io.equinox.scheme.light-soft-islands"
-            path="colors/equinox-light-soft-islands.icls"
+            path="/colors/equinox-light-soft-islands.xml"
         />
         <bundledColorScheme
             id="io.equinox.scheme.light-contrast-islands"
-            path="colors/equinox-light-contrast-islands.icls"
+            path="/colors/equinox-light-contrast-islands.xml"
         />
 
     </extensions>

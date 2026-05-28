@@ -37,8 +37,8 @@ After installing:
 ## Features
 
 - **4 variants**: Dark Modern, Dark Contrast, Light Soft, Light Contrast
-- **3 platforms**: VS Code (JSON), JetBrains (ICLS + theme.json), macOS Terminal (plist)
-- **JetBrains Islands / New UI**: each variant ships an Islands color scheme (`.icls`) and a full UI theme (`.theme.json`) for the floating-panel New UI layout
+- **3 platforms**: VS Code (JSON), JetBrains (XML + theme.json), macOS Terminal (plist)
+- **JetBrains Islands / New UI**: each variant ships an Islands color scheme (`.xml`) and a full UI theme (`.theme.json`) for the floating-panel New UI layout
 - **Accent color** propagated to `window.activeBorder`/`window.inactiveBorder` (VS Code) and hyperlinks/identifier highlights (JetBrains)
 - **WCAG AAA**: 7:1 minimum contrast for all text/background combinations
 - **Single source of truth**: `src/colors/palette.ts` drives every output file
@@ -79,8 +79,8 @@ Build output:
 dist/
 ├── vscode/           # 4 × .json theme files
 ├── jetbrains/
-│   ├── *.icls        # 4 × classic color schemes
-│   ├── *-islands.icls # 4 × Islands color schemes (New UI)
+│   ├── *.xml          # 4 × classic color schemes
+│   ├── *-islands.xml  # 4 × Islands color schemes (New UI)
 │   └── themes/       # 4 × .theme.json UI themes
 ├── terminal/         # 4 × .terminal plist profiles
 └── manifest.json
@@ -102,7 +102,7 @@ The playground renders live simulations of VS Code, JetBrains (classic), JetBrai
 - **Platform** — switch between VS Code, JetBrains IDE, JetBrains Islands, Terminal previews
 - **Settings** — toggle dark mode and frosted glass style; access Help & Wiki
 
-The **JetBrains Islands** preview simulates the New UI floating-panel layout: each tool window renders as a separate rounded island over a darker desktop background, matching the visual result of installing both the `.icls` color scheme and the `.theme.json` UI theme.
+The **JetBrains Islands** preview simulates the New UI floating-panel layout: each tool window renders as a separate rounded island over a darker desktop background, matching the visual result of installing both the `.xml` color scheme and the `.theme.json` UI theme.
 
 ### Liquid Glass
 
@@ -140,7 +140,7 @@ After installing:
 **Manual install — Classic UI** (color scheme only):
 
 ```bash
-cp dist/jetbrains/*.icls ~/Library/Application\ Support/JetBrains/*/colors/
+cp dist/jetbrains/*.xml ~/Library/Application\ Support/JetBrains/*/colors/
 # Linux: ~/.config/JetBrains/*/colors/
 # Windows: %APPDATA%\JetBrains\<IDE>\colors\
 ```
@@ -151,7 +151,7 @@ Then go to **Settings → Editor → Color Scheme** and select the desired Equin
 
 ```bash
 # Color schemes (editor, includes Islands-specific desktop color)
-cp dist/jetbrains/*-islands.icls ~/Library/Application\ Support/JetBrains/*/colors/
+cp dist/jetbrains/*-islands.xml ~/Library/Application\ Support/JetBrains/*/colors/
 
 # UI themes — both classic and Islands .theme.json
 cp dist/jetbrains/themes/*.theme.json ~/Library/Application\ Support/JetBrains/*/themes/
@@ -227,8 +227,8 @@ src/themes/variants.ts     ← typed EquinoxVariant objects
        ↓
 src/platforms/
   vscode.ts    → dist/vscode/*.json
-  jetbrains.ts → dist/jetbrains/*.icls
-               → dist/jetbrains/*-islands.icls
+  jetbrains.ts → dist/jetbrains/*.xml
+               → dist/jetbrains/*-islands.xml
                → dist/jetbrains/themes/*.theme.json       (4 classic + 4 Islands)
   terminal.ts  → [profile data] → scripts/generate-terminal.py
                                 → dist/terminal/*.terminal

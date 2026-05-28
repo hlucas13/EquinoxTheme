@@ -45,11 +45,11 @@ The syntax colors share the same cool-warm balance across all variants:
 
 Equinox Colors is a multi-platform theme system. The same palette ships across:
 
-| Platform           | Format                                                             |
-| ------------------ | ------------------------------------------------------------------ |
-| **VS Code**        | `.json` color themes                                               |
-| **JetBrains IDEs** | `.icls` color schemes + `.theme.json` UI themes (New UI + Islands) |
-| **macOS Terminal** | `.terminal` profiles                                               |
+| Platform           | Format                                                            |
+| ------------------ | ----------------------------------------------------------------- |
+| **VS Code**        | `.json` color themes                                              |
+| **JetBrains IDEs** | `.xml` color schemes + `.theme.json` UI themes (New UI + Islands) |
+| **macOS Terminal** | `.terminal` profiles                                              |
 
 ---
 

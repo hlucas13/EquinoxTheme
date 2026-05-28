@@ -168,9 +168,9 @@ describe('generateJetBrainsTheme', () => {
         expect(theme.ui['Desktop.background']).toMatch(/^#[0-9a-fA-F]{6,8}$/);
     });
 
-    it('editorScheme is a classpath resource path (/colors/{slug}.icls)', () => {
+    it('editorScheme is a classpath resource path (/colors/{slug}.xml)', () => {
         const theme = generateJetBrainsTheme(equinoxDarkModern);
-        expect(theme.editorScheme).toMatch(/^\/colors\/.+\.icls$/);
+        expect(theme.editorScheme).toMatch(/^\/colors\/.+\.xml$/);
     });
 
     it('icons.ColorPalette has Actions.Red entry', () => {
@@ -256,7 +256,7 @@ describe('generateJetBrainsIslandsTheme', () => {
     it('editorScheme is the scheme name (not a file path)', () => {
         const theme = generateJetBrainsIslandsTheme(equinoxDarkModern);
         expect(theme.editorScheme).toBe(`${equinoxDarkModern.name} Islands`);
-        expect(theme.editorScheme).not.toMatch(/^\/|\.icls$/);
+        expect(theme.editorScheme).not.toMatch(/^\/|\.xml$/);
     });
 
     it('ui contains Islands key set to "1"', () => {

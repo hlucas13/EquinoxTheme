@@ -20,7 +20,7 @@ The dock at the bottom switches between four fully rendered platform simulations
 
 - **VS Code** — titlebar, activity bar, sidebar, editor, status bar
 - **JetBrains IDE** — classic layout with sidebar, tabbar, editor, and status bar
-- **JetBrains Islands** — New UI floating-panel layout; requires both `.icls` and `.theme.json`
+- **JetBrains Islands** — New UI floating-panel layout; requires both `.xml` and `.theme.json`
 - **macOS Terminal** — terminal output with ANSI 16-color rendering
 
 Each preview fills the space below the header (the header is anchored at the top of the page, not floating). The dock floats over the preview at the bottom.

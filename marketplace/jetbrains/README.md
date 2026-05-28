@@ -33,14 +33,14 @@ META-INF/
   plugin.xml
   pluginIcon.png
 colors/
-  equinox-dark-modern.icls
-  equinox-dark-modern-islands.icls
-  equinox-dark-contrast.icls
-  equinox-dark-contrast-islands.icls
-  equinox-light-soft.icls
-  equinox-light-soft-islands.icls
-  equinox-light-contrast.icls
-  equinox-light-contrast-islands.icls
+  equinox-dark-modern.xml
+  equinox-dark-modern-islands.xml
+  equinox-dark-contrast.xml
+  equinox-dark-contrast-islands.xml
+  equinox-light-soft.xml
+  equinox-light-soft-islands.xml
+  equinox-light-contrast.xml
+  equinox-light-contrast-islands.xml
 themes/
   equinox-dark-modern.theme.json
   equinox-dark-contrast.theme.json
@@ -74,12 +74,12 @@ mkdir -p "$PLUGIN_DIR/themes"
 
 # 3. Copy files
 cp marketplace/jetbrains/plugin.xml "$PLUGIN_DIR/META-INF/"
-cp dist/jetbrains/*.icls             "$PLUGIN_DIR/colors/"
+cp dist/jetbrains/*.xml             "$PLUGIN_DIR/colors/"
 cp dist/jetbrains/themes/*.theme.json "$PLUGIN_DIR/themes/"
 
 # 4. Zip
 cd marketplace/jetbrains
-zip -r equinox-colors-1.0.0.zip equinox-colors/
+zip -r equinox-colors-1.0.3.zip equinox-colors/
 ```
 
 ## Plugin icon

@@ -1,7 +1,7 @@
 /**
  * Equinox Colors: Build Script
  * Orchestrates compilation of all 4 variants across all 3 platforms
- * Outputs: dist/vscode/*.json, dist/jetbrains/*.icls, dist/terminal/*.terminal
+ * Outputs: dist/vscode/*.json, dist/jetbrains/*.xml, dist/terminal/*.terminal
  */
 
 import { execFileSync } from 'node:child_process';
@@ -75,14 +75,14 @@ function buildJetBrainsSchemes() {
         // Standard color scheme
         const scheme = generateJetBrainsColorScheme(variant);
         const xml = jetBrainsColorSchemeToXml(scheme);
-        fs.writeFileSync(path.join(jetbrainsDir, `${slug}.icls`), xml, 'utf-8');
+        fs.writeFileSync(path.join(jetbrainsDir, `${slug}.xml`), xml, 'utf-8');
         console.log(`  ✓ ${variant.name}`);
 
         // Islands variant color scheme
         const islandsScheme = generateJetBrainsIslandsColorScheme(variant);
         const islandsXml = jetBrainsColorSchemeToXml(islandsScheme);
         fs.writeFileSync(
-            path.join(jetbrainsDir, `${slug}-islands.icls`),
+            path.join(jetbrainsDir, `${slug}-islands.xml`),
             islandsXml,
             'utf-8'
         );
@@ -199,15 +199,15 @@ function generateManifest() {
                 ),
             },
             jetbrains: {
-                format: 'ICLS (XML)',
+                format: 'Color Scheme XML',
                 directory: 'jetbrains/',
                 colorSchemes: variants.map(
                     (v) =>
-                        `${v.name.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '')}.icls`
+                        `${v.name.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '')}.xml`
                 ),
                 islandsColorSchemes: variants.map(
                     (v) =>
-                        `${v.name.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '')}-islands.icls`
+                        `${v.name.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '')}-islands.xml`
                 ),
                 uiThemes: variants.map(
                     (v) =>
@@ -217,10 +217,7 @@ function generateManifest() {
             terminal: {
                 format: 'Terminal.app plist',
                 directory: 'terminal/',
-                files: variants.map(
-                    (v) =>
-                        `${v.name.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '')}.terminal`
-                ),
+                files: variants.map((v) => `${v.name}.terminal`),
             },
         },
     };
@@ -250,7 +247,7 @@ export function build(): void {
         );
         console.log(`   VS Code: ${variants.length} × .json`);
         console.log(
-            `   JetBrains: ${variants.length} × .icls + ${variants.length} × Islands .icls + ${variants.length} × .theme.json`
+            `   JetBrains: ${variants.length} × .xml + ${variants.length} × Islands .xml + ${variants.length} × .theme.json`
         );
         console.log(`   Terminal: ${variants.length} × .terminal`);
     } catch (error) {

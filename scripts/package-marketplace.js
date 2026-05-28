@@ -199,10 +199,10 @@ async function packageJetBrains() {
         );
     }
 
-    // .icls color scheme files
+    // .xml color scheme files
     const jetbrainsDistDir = path.join(DIST, 'jetbrains');
     for (const f of fs.readdirSync(jetbrainsDistDir)) {
-        if (f.endsWith('.icls')) {
+        if (f.endsWith('.xml')) {
             fs.copyFileSync(
                 path.join(jetbrainsDistDir, f),
                 path.join(colorsOut, f)

@@ -684,7 +684,7 @@ export function generateJetBrainsTheme(
     const lineNumber = p.ui.lineNumber;
     const desktopHex = `#${islandsDesktopColor(variant)}`;
 
-    // Slug for the editorScheme reference (matches the .icls filename)
+    // Slug for the editorScheme reference (matches the .xml filename)
     const slug = variant.name
         .toLowerCase()
         .replace(/\s+/g, '-')
@@ -694,7 +694,7 @@ export function generateJetBrainsTheme(
         name: variant.name,
         dark: isDark,
         author: 'Equinox Team',
-        editorScheme: `/colors/${slug}.icls`,
+        editorScheme: `/colors/${slug}.xml`,
         ui: {
             // ── Desktop (Islands wallpaper) ──────────────────────────────────
             'Desktop.background': desktopHex,
@@ -857,7 +857,7 @@ export function jetBrainsThemeToJson(theme: JetBrainsTheme): string {
 // JETBRAINS ISLANDS UI THEME (.theme.json)
 // Separate theme entry for the New UI / Islands floating-panel layout.
 // Inherits from "Islands Dark" / "Islands Light" built-in parent theme and
-// adds Equinox colours on top.  editorScheme references the Islands .icls by
+// adds Equinox colours on top.  editorScheme references the Islands scheme by
 // name so JetBrains applies it automatically when the user selects this theme.
 // ============================================================================
 
